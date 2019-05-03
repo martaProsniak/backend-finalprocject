@@ -1,6 +1,7 @@
 package pl.codementors.finalProject.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.codementors.finalProject.models.User;
 import pl.codementors.finalProject.repo.UserRepository;
@@ -19,6 +20,11 @@ public class UserController {
 
     public UserController(final UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @GetMapping(value={"", "/", "/home"})
+    public String greet(){
+        return "Welcome to our store!";
     }
 
     @GetMapping("/users")
