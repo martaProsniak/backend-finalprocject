@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "user")
-public class LocalUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,9 +44,9 @@ public class LocalUser {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    public LocalUser(){}
+    public User(){}
 
-    public LocalUser(Long id, String name, String surname, String login, Boolean accepted, UserRole role) {
+    public User(Long id, String name, String surname, String login, Boolean accepted, UserRole role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
