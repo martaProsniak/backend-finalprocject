@@ -49,10 +49,7 @@ public class ProductController {
     @PostMapping("/products/add")
     @ResponseStatus(HttpStatus.CREATED)
     public Product saveProduct(@RequestBody Product userProduct) {
-        Product product = new Product();
-        product.setDescription(userProduct.getDescription());
-        productRepository.save(product);
-        return product;
+        return productService.saveProduct(userProduct);
     }
 
 }
