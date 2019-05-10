@@ -25,19 +25,31 @@ public class ProductController {
         return productService.findAll();
     }
 
-    @PostMapping("/product")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 
-        Product newProduct = productService.saveProduct(product);
+        @PostMapping("/product")
+        public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 
-        try {
-            // Build a created response
-            return ResponseEntity
-                    .created(new URI("/product/" + newProduct.getId()))
-                    .body(newProduct);
-        } catch (URISyntaxException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            Product newProduct = productService.saveProduct(product);
+
+            try {
+                // Build a created response
+                return ResponseEntity
+                        .created(new URI("/product/" + newProduct.getId()))
+                        .body(newProduct);
+            } catch (URISyntaxException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
         }
+
+        @GetMapping("/products/{id}")
+        public Product getProductById (@PathVariable Integer id) {
+        return productService.getProductById(id);
+        }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product saveProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
 }
