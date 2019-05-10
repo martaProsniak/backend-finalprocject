@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.codementors.finalProject.models.Product;
+import pl.codementors.finalProject.repo.ProductRepository;
 import pl.codementors.finalProject.services.ProductService;
 
 import java.net.URI;
@@ -12,13 +13,12 @@ import java.net.URISyntaxException;
 
 @RestController
 public class ProductController {
-
+    @Autowired
     private ProductService productService;
 
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
+    private ProductRepository productRepository;
+
 
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
@@ -42,14 +42,17 @@ public class ProductController {
         }
 
         @GetMapping("/products/{id}")
-        public Product getProductById (@PathVariable Integer id) {
-        return productService.getProductById(id);
+        public Product getProductById (@PathVariable Long id) {
+        return productService.findOne(id);
         }
 
-    @PostMapping
+    @PostMapping("/products/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product saveProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
+    public Product saveProduct(@RequestBody Product userProduct) {
+        Product product = new Product();
+        product.setDescription(userProduct.getDescription());
+        productRepository.save(product);
+        return product;
     }
 
 }

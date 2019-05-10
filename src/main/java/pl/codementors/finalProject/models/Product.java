@@ -14,18 +14,12 @@ public class Product {
     private Long id;
 
     @Column
-    @NotNull
-    @NotEmpty
     private String name;
 
     @Column
-    @NotNull
-    @NotEmpty
     private String description;
 
     @Column
-    @NotNull
-    @NotEmpty
     private double price;
 
     @Column

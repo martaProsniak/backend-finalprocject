@@ -9,6 +9,16 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    @Override
+    public void deleteProduct(Long id) {
+
+    }
+
+    @Override
+    public Product findOne(Long id) {
+        return productRepository.findOne(id);
+    }
+
 
     private ProductRepository productRepository;
 
@@ -22,19 +32,11 @@ public class ProductServiceImpl implements ProductService {
         return (List<Product>) productRepository.findAll();
     }
 
-    @Override
-    public Product getProductById(Integer Id) {
-        return productRepository.findOne(Id);
-    }
 
     @Override
     public Product saveProduct(Product product) {
        return  productRepository.save(product);
     }
 
-    @Override
-    public void deleteProduct(Integer Id) {
-
-    }
 
 }

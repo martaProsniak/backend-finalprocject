@@ -6,8 +6,8 @@ import pl.codementors.finalProject.models.Product;
 public interface ProductService {
 
     Iterable<Product> findAll();
-    Product getProductById(Integer Id);
+    Product findOne(Long id);
     Product saveProduct(Product product);
-    void deleteProduct(Integer Id);
+    void deleteProduct(Long id);
 
 }
