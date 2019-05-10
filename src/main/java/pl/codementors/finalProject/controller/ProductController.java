@@ -3,7 +3,6 @@ package pl.codementors.finalProject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.services.ProductService;
@@ -11,7 +10,7 @@ import pl.codementors.finalProject.services.ProductService;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@Controller
+@RestController
 public class ProductController {
 
     private ProductService productService;
@@ -23,7 +22,7 @@ public class ProductController {
 
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
-        return productService.listAllProducts();
+        return productService.findAll();
     }
 
     @PostMapping("/product")

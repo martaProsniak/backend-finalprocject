@@ -1,6 +1,9 @@
 package pl.codementors.finalProject.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -10,19 +13,32 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
+    @NotNull
+    @NotEmpty
     private String name;
+
+    @Column
+    @NotNull
+    @NotEmpty
     private String description;
+
+    @Column
+    @NotNull
+    @NotEmpty
     private double price;
-    private boolean isAvailable;
+
+    @Column
+    private boolean available;
 
     public Product() {
     }
 
-    public Product(String name, String description, double price, boolean isAvailable) {
+    public Product(String name, String description, double price, boolean available) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.isAvailable = isAvailable;
+        this.available = available;
     }
 
     public Long getId() {
@@ -58,10 +74,10 @@ public class Product {
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.available = available;
     }
 }
