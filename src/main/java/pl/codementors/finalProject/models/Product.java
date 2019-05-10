@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -25,10 +26,17 @@ public class Product {
     @Column
     private boolean available;
 
+    @Column
+    private String url;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private User user;
+
     public Product() {
     }
 
-    public Product(String name, String description, double price, boolean available) {
+    public Product(String name, String description, double price, boolean available, String url) {
         this.name = name;
         this.description = description;
         this.price = price;

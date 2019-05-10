@@ -3,15 +3,9 @@ package pl.codementors.finalProject.models;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table( name = "user")
@@ -22,8 +16,6 @@ public class User {
     private Long id;
 
     @Column
-    @NotNull
-    @NotEmpty
     private String name;
 
     @Column
@@ -31,18 +23,17 @@ public class User {
 
     @Column
     @Email
-    @NotNull
-    @NotEmpty
     private String login;
 
     @Column
     private Boolean accepted;
 
     @Column
-    @NotNull
-    @NotEmpty
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user" )
+    private List<Product> products;
 
     public User(){}
 
@@ -101,5 +92,13 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
