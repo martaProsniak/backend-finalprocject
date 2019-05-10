@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
     public User activate(User user) {
         return null;
     }
+
+    @Override
+    public User findOne(Long id) {
+        return userRepository.findOne(id);
+    }
 }

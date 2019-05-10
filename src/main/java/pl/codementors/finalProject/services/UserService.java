@@ -16,4 +16,6 @@ public interface UserService {
     void delete (User user);
 
     User activate (User user);
+
+    User findOne(Long id);
 }

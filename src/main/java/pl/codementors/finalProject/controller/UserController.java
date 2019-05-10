@@ -51,7 +51,7 @@ public class UserController {
     @PutMapping("/users/{userId}/product/{productId}")
     public User userSetProduct (@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
 
-        user = userRepository.findOne(userId);
+        user = userService.findOne(userId);
         Product product = productRepository.findOne(productId);
         products.add(product);
         user.setProducts(products);
