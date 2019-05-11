@@ -22,11 +22,11 @@ import java.util.List;
  */
 
 @RestController
-public class UserController {
+public class UserRestController {
 
     User user;
 
-    //TODO
+    //TODO try to move field to service
     private List<Product> products = new ArrayList<>();
 
     @Autowired
@@ -47,20 +47,4 @@ public class UserController {
     public List<User> getUsers() {
         return userService.findAll();
     }
-
-    @PutMapping("/users/{userId}/product/{productId}")
-    public User userSetProduct (@PathVariable("userId") Long userId, @PathVariable("productId") Long productId) {
-
-        user = userService.findOne(userId);
-        Product product = productRepository.findOne(productId);
-        products.add(product);
-        user.setProducts(products);
-        productRepository.save(product);
-        userRepository.save(user);
-        return user;
-    }
-
-
-
-
 }

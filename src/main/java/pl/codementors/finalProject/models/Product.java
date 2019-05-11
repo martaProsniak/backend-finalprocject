@@ -1,5 +1,11 @@
 package pl.codementors.finalProject.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -8,11 +14,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long productid;
 
     @Column
     private String name;
@@ -30,8 +37,9 @@ public class Product {
     private String url;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
-    private User user;
+    @JoinColumn(referencedColumnName = "cartid")
+    @JsonIgnore
+    private Cart cart;
 
     public Product() {
     }
@@ -44,11 +52,11 @@ public class Product {
     }
 
     public Long getId() {
-        return id;
+        return productid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long productid) {
+        this.productid = productid;
     }
 
     public String getName() {
@@ -81,5 +89,21 @@ public class Product {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

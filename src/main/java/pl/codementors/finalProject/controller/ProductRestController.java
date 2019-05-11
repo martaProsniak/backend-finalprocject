@@ -10,9 +10,10 @@ import pl.codementors.finalProject.services.ProductService;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
-public class ProductController {
+public class ProductRestController {
     @Autowired
     private ProductService productService;
 
@@ -21,8 +22,8 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public Iterable<Product> getProducts() {
-        return productService.findAll();
+    public List<Product> getProducts() {
+        return productRepository.findAll();
     }
 
 
