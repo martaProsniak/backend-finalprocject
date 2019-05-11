@@ -1,5 +1,7 @@
 package pl.codementors.finalProject.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -32,8 +34,9 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    @OneToMany(mappedBy = "user" )
-    private List<Product> products;
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     public User(){}
 
@@ -94,11 +97,11 @@ public class User {
         this.role = role;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
