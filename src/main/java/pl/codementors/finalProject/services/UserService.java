@@ -9,13 +9,13 @@ public interface UserService {
 
     List<User> findAll();
 
-    User create (User user);
+    User createUser (User user);
 
     User edit (User user);
 
-    void delete (User user);
+    void deleteUser (Long id);
 
-    User activate (User user);
+    void activate (Long id);
 
     User findOne(Long id);
 }
