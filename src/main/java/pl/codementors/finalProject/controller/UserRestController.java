@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.models.User;
+import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.ProductRepository;
 import pl.codementors.finalProject.repo.UserRepository;
 import pl.codementors.finalProject.services.UserService;
@@ -24,19 +26,21 @@ import java.util.List;
 @RestController
 public class UserRestController {
 
-    User user;
+    //TODO moove to service
+    private User user;
+    private Cart cart;
 
     //TODO try to move field to service
     private List<Product> products = new ArrayList<>();
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @GetMapping(value={"", "/", "/home"})
     public String greet(){
@@ -45,6 +49,15 @@ public class UserRestController {
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        return userService.findAll();
+        return userRepository.findAll();
+    }
+
+    @PutMapping("/users/{userId}/setCart/{cartId}")
+    public User addCart(@PathVariable("userId") Long userId, @PathVariable("cartId") Long cartId){
+        user = userRepository.findOne(userId);
+        cart = cartRepository.findOne(cartId);
+        user.setCart(cart);
+        userRepository.save(user);
+        return user;
     }
 }

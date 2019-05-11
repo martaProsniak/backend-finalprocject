@@ -47,6 +47,7 @@ public class CartRestController {
         product = productRepository.findOne(productId);
         products.add(product);
         cart.setProducts(products);
+        product.setCart(cart);
         cartRepository.save(cart);
         return cart;
     }
