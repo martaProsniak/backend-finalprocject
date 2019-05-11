@@ -4,10 +4,8 @@ package pl.codementors.finalProject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.models.User;
-import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.services.ProductService;
 import pl.codementors.finalProject.services.UserService;
 
@@ -22,8 +20,6 @@ import java.util.List;
 @RestController
 public class UserRestController {
 
-    private Cart cart;
-
     //TODO try to move field to service
     private List<Product> products = new ArrayList<>();
 
@@ -33,9 +29,6 @@ public class UserRestController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private CartRepository cartRepository;
-
     @GetMapping(value={"", "/", "/home"})
     public String greet(){
         return "Welcome to our store!";
@@ -43,7 +36,7 @@ public class UserRestController {
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        return userService.findAll();
+        return userService.findAllUsers();
     }
 
     @GetMapping("/users/{id}")
@@ -53,34 +46,32 @@ public class UserRestController {
 
     @PostMapping("/users/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public User saveUser (@RequestBody User user) {
+    public User create (@RequestBody User user) {
         return userService.createUser(user);
     }
 
     @PostMapping("/users/delete/{id}")
-    public void removeUser (@PathVariable Long id) {
+    public void remove (@PathVariable Long id) {
         userService.deleteUser(id);
     }
 
     @PostMapping("/users/edit/{id}")
-    public User editUser (@RequestBody User user) {
-        return userService.edit(user);
+    public User edit (@RequestBody User user) {
+        return userService.editUser(user);
     }
 
     @PostMapping("/users/activate/{id}")
-    public void editUser (@PathVariable Long id) {
-      userService.activate(id);
+    public void activate (@PathVariable Long id) {
+      userService.activateUser(id);
     }
 
+    @PostMapping("/users/deactivate/{id}")
+    public void deactivate (@PathVariable Long id) {
+        userService.deactivateUser(id);
+    }
 
-/*
     @PutMapping("/users/{userId}/setCart/{cartId}")
     public User addCart(@PathVariable("userId") Long userId, @PathVariable("cartId") Long cartId){
-
-        user = userService.findOne(userId);
-        cart = cartRepository.findOne(cartId);
-        user.setCart(cart);
-        userService.save(user);
-        return user;
-    }*/
+       return userService.addCart(userId, cartId);
+    }
 }
