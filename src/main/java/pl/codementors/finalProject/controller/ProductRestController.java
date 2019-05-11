@@ -2,14 +2,10 @@ package pl.codementors.finalProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.codementors.finalProject.models.Product;
-import pl.codementors.finalProject.repo.ProductRepository;
 import pl.codementors.finalProject.services.ProductService;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -17,20 +13,41 @@ public class ProductRestController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private ProductRepository productRepository;
-
 
     @GetMapping("/products")
     public List<Product> getProducts() {
-        return productRepository.findAll();
+        return productService.findAll();
+    }
+
+    @GetMapping("/products/{id}")
+    public Product getProductById(@PathVariable Long id) {
+        return productService.findOne(id);
+    }
+
+    @PostMapping("/products/add")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product addProduct(@RequestBody Product userProduct) {
+        return productService.addProduct(userProduct);
+    }
+
+    @PutMapping("/products/edit/{id}")
+    public Product editProduct(@RequestBody Product product) {
+        return productService.editProduct(product);
+    }
+
+    @PostMapping("/products/delete/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
     }
 
 
+
+
+    /*
         @PostMapping("/product")
         public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 
-            Product newProduct = productService.saveProduct(product);
+            Product newProduct = productService.addProduct(product);
 
             try {
                 // Build a created response
@@ -41,16 +58,5 @@ public class ProductRestController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
         }
-
-        @GetMapping("/products/{id}")
-        public Product getProductById (@PathVariable Long id) {
-        return productService.findOne(id);
-        }
-
-    @PostMapping("/products/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product saveProduct(@RequestBody Product userProduct) {
-        return productService.saveProduct(userProduct);
-    }
-
+*/
 }

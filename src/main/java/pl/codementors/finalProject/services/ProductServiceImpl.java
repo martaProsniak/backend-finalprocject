@@ -9,9 +9,12 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Override
-    public void deleteProduct(Long id) {
 
+    private ProductRepository productRepository;
+
+    @Autowired
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -19,26 +22,23 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findOne(id);
     }
 
-
-    private ProductRepository productRepository;
-
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
     @Override
     public List<Product> findAll() {
-        return (List<Product>) productRepository.findAll();
+        return productRepository.findAll();
     }
-
 
     @Override
-    public Product saveProduct(Product product) {
-       return  productRepository.save(product);
+    public Product addProduct(Product product) {
+        return productRepository.save(product);
     }
 
+    @Override
+    public Product editProduct(Product product) {
+        return productRepository.save(product);
+    }
 
-
-
+    @Override
+    public void deleteProduct(Long id) {
+        productRepository.delete(id);
+    }
 }
