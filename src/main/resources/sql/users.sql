@@ -1,5 +1,3 @@
---String id, String name, String surname, String login, Boolean isAccepted, UserRole role
-
 INSERT INTO user(NAME, SURNAME, LOGIN, ACCEPTED, ROLE) VALUES
 ('Tomek', 'Gutowski', 'tomekg@o2.pl', true, 'ADMIN'),
 ('Marta', 'Prosniak', 'martap@o2.pl', true, 'ADMIN'),
@@ -11,5 +9,3 @@ INSERT INTO user(NAME, SURNAME, LOGIN, ACCEPTED, ROLE) VALUES
 ('Anna', 'Zaradna', 'annaz@o2.pl', true, 'USER'),
 ('Viktoria', 'Zwycieska', 'vikiz@o2.pl', true, 'USER'),
 ('Ewa', 'Fiwom', 'ewaf@o2.pl', false, 'USER');
-
---
