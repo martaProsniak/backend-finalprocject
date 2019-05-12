@@ -4,18 +4,25 @@ import pl.codementors.finalProject.models.User;
 
 import java.util.List;
 
+/**
+ * @author Marta
+ */
 public interface UserService {
 
 
-    List<User> findAll();
+    List<User> findAllUsers();
 
-    User create (User user);
+    User createUser (User user);
 
-    User edit (User user);
+    User editUser(User user);
 
-    void delete (User user);
+    void deleteUser (Long id);
 
-    User activate (User user);
+    void activateUser(Long id);
+
+    void deactivateUser (Long id);
 
     User findOne(Long id);
+
+    User addCart(Long userId, Long cartId);
 }

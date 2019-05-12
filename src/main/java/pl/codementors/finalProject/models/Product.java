@@ -2,15 +2,9 @@ package pl.codementors.finalProject.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -19,7 +13,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long productid;
+    private Long id;
 
     @Column
     private String name;
@@ -49,14 +43,15 @@ public class Product {
         this.description = description;
         this.price = price;
         this.available = available;
+        this.url = url;
     }
 
     public Long getId() {
-        return productid;
+        return id;
     }
 
     public void setId(Long productid) {
-        this.productid = productid;
+        this.id = productid;
     }
 
     public String getName() {
