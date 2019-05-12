@@ -1,17 +1,12 @@
 package pl.codementors.finalProject.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table( name = "user")
-public class User {
+public class LocalUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,15 +27,15 @@ public class User {
 
     @Column
     @Enumerated(value = EnumType.STRING)
-    private UserRole role;
+    private LocalUserRole role;
 
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    public User(){}
+    public LocalUser(){}
 
-    public User(Long id, String name, String surname, String login, Boolean accepted, UserRole role) {
+    public LocalUser(Long id, String name, String surname, String login, Boolean accepted, LocalUserRole role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -89,11 +84,11 @@ public class User {
         this.accepted = accepted;
     }
 
-    public UserRole getRole() {
+    public LocalUserRole getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(LocalUserRole role) {
         this.role = role;
     }
 

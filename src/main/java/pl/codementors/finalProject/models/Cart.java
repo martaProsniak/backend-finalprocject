@@ -1,8 +1,6 @@
 package pl.codementors.finalProject.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.Entity;
@@ -26,7 +24,7 @@ public class Cart {
     private List<Product> products;
 
     @OneToOne(mappedBy = "cart")
-    private User user;
+    private LocalUser localUser;
 
     public Cart(){}
 
@@ -50,12 +48,12 @@ public class Cart {
         this.products = products;
     }
 
-    public User getUser() {
-        return user;
+    public LocalUser getLocalUser() {
+        return localUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLocalUser(LocalUser localUser) {
+        this.localUser = localUser;
     }
 
     public Cart addProduct(Product product) {
