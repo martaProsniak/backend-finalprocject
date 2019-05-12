@@ -1,11 +1,15 @@
 --String id, String name, String surname, String login, Boolean isAccepted, UserRole role
 
 INSERT INTO user(NAME, SURNAME, LOGIN, ACCEPTED, ROLE) VALUES
-('Tomek', 'Gutowski', 'tomek@o2.pl', true, 'ADMIN'),
-('Marta', 'Prosniak', 'marta@o2.pl', true, 'USER');
+('Tomek', 'Gutowski', 'tomekg@o2.pl', true, 'ADMIN'),
+('Marta', 'Prosniak', 'martap@o2.pl', true, 'ADMIN'),
+('Mateusz', 'Kalwaj', 'mateuszk@o2.pl', true, 'ADMIN'),
+('Damian', 'Strzemien', 'damians@o2.pl', true, 'ADMIN'),
+('Adam', 'First', 'adamf@o2.pl', true, 'USER'),
+('Grzegorz', 'Brzeczyszczykiewicz', 'gregorb@o2.pl', true, 'USER'),
+('Franciszek', 'Dolas', 'franekd@o2.pl', true, 'USER'),
+('Anna', 'Zaradna', 'annaz@o2.pl', true, 'USER'),
+('Viktoria', 'Zwycieska', 'vikiz@o2.pl', true, 'USER'),
+('Ewa', 'Fiwom', 'ewaf@o2.pl', false, 'USER');
+
 --
--- String name, String description, double price, boolean available
-INSERT INTO products(NAME, DESCRIPTION, PRICE, AVAILABLE, URL) VALUES
-('produkt1', 'opis', 10, true, 'ojowej.pl'),
-('produkt2', 'opis', 10, true,'ojowej.pl'),
-('produkt3', 'opis', 10, true,'ojowej.pl');
