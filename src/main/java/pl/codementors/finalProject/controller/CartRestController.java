@@ -11,7 +11,6 @@ import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.ProductRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,14 +38,13 @@ public class CartRestController {
         return newCart;
     }
 
+    //TODO moove logic to service
     @PutMapping(value = "/cart/{cartId}/add/product/{productId}")
     public Cart cartAddProduct(@PathVariable("cartId") Long cartId,
                                @PathVariable("productId") Long productId){
-        List<Product> products = new ArrayList<>();
         cart = cartRepository.findOne(cartId);
         product = productRepository.findOne(productId);
-        products.add(product);
-        cart.setProducts(products);
+        cart.addProduct(product);
         product.setCart(cart);
         cartRepository.save(cart);
         return cart;

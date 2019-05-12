@@ -30,9 +30,6 @@ public class UserRestController {
     private User user;
     private Cart cart;
 
-    //TODO try to move field to service
-    private List<Product> products = new ArrayList<>();
-
     @Autowired
     private UserRepository userRepository;
 

@@ -57,4 +57,11 @@ public class Cart {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Cart addProduct(Product product) {
+        Cart cart = new Cart();
+        products.add(product);
+        cart.setProducts(products);
+        return cart;
+    }
 }
