@@ -12,15 +12,18 @@ public class LocalUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
     @Column
     private String surname;
 
-    @Column
+    @Column(unique = true)
     @Email
     private String login;
+
+    @Column
+    private String password;
 
     @Column
     private Boolean accepted;
@@ -35,11 +38,18 @@ public class LocalUser {
 
     public LocalUser(){}
 
-    public LocalUser(Long id, String name, String surname, String login, Boolean accepted, LocalUserRole role) {
+    public LocalUser(Long id,
+                     String name,
+                     String surname,
+                     String login,
+                     String password,
+                     Boolean accepted,
+                     LocalUserRole role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.login = login;
+        this.password = password;
         this.accepted = accepted;
         this.role = role;
     }
@@ -74,6 +84,14 @@ public class LocalUser {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getAccepted() {

@@ -8,6 +8,7 @@ import pl.codementors.finalProject.repo.LocalUserRepository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Marta
@@ -69,5 +70,10 @@ public class LocalUserServiceImpl implements LocalUserService {
     public LocalUser addCart(Long userId, Long cartId) {
         localUserRepository.findOne(userId).setCart(cartRepository.findOne(cartId));
         return localUserRepository.save(localUserRepository.findOne(userId));
+    }
+
+    @Override
+    public Optional<LocalUser> findByName(String userName) {
+        return localUserRepository.findByName(userName);
     }
 }

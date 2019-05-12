@@ -5,11 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Marta
  */
 @Repository
-public interface LocalUserRepository extends CrudRepository<LocalUser, Long> {
+public interface LocalUserRepository extends CrudRepository<LocalUser, Long>{
     List<LocalUser> findAll();
+    Optional<LocalUser> findByName(String userName);
 }
