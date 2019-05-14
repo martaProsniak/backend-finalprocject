@@ -22,8 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      protected void configure(HttpSecurity http) throws Exception {
           http
                   .authorizeRequests()
-                  .antMatchers("/users/**").hasRole(LocalUserRole.ADMIN.name())
-                  .antMatchers("/cart/**").hasRole(LocalUserRole.USER.name())
+                  .antMatchers("/users**").hasRole(LocalUserRole.ADMIN.name())
+                  .antMatchers("/products**").permitAll()
+                  .antMatchers("/cart**").hasRole(LocalUserRole.USER.name())
                   .and().csrf().disable()
                   .httpBasic().and()
                   .logout().and()
@@ -42,15 +43,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
           return authProvider;
      }
-
-     /**
-      *  @Bean
-      *     public DaoAuthenticationProvider authenticationProvider() {
-      *         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-      *         authProvider.setUserDetailsService(userDetailsService);
-      *         authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
-      *         return authProvider;
-      *     }
-      *
-      */
 }

@@ -62,4 +62,9 @@ public class Cart {
         cart.setProducts(products);
         return cart;
     }
+
+    public List<Product> removeProduct(Product product) {
+        products.remove(product);
+        return products;
+    }
 }
