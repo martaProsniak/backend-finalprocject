@@ -8,6 +8,7 @@ import pl.codementors.finalProject.services.ProductService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ProductRestController {
     @Autowired

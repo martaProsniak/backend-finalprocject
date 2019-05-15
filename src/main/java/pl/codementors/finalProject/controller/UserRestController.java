@@ -18,23 +18,26 @@ import java.util.List;
  */
 
 @RestController
+@CrossOrigin
 public class UserRestController {
 
-    //TODO try to move field to service
-    private List<Product> products = new ArrayList<>();
-
-    @Autowired
     private UserService userService;
 
-    @Autowired
+
     private ProductService productService;
+
+    @Autowired
+    public UserRestController(UserService userService, ProductService productService){
+        this.userService = userService;
+        this.productService = productService;
+    }
 
     @GetMapping(value={"", "/", "/home"})
     public String greet(){
         return "Welcome to our store!";
     }
 
-    @GetMapping("/users")
+    @GetMapping("/users/")
     public List<User> getUsers() {
         return userService.findAllUsers();
     }

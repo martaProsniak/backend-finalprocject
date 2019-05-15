@@ -1,11 +1,7 @@
 package pl.codementors.finalProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.CartRepository;
@@ -13,6 +9,7 @@ import pl.codementors.finalProject.repo.ProductRepository;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class CartRestController {
 
