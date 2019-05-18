@@ -20,6 +20,7 @@ import java.util.List;
  * Rest controller for users
  */
 
+@CrossOrigin
 @RestController
 public class LocalUserRestController {
 

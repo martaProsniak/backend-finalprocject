@@ -3,9 +3,10 @@ package pl.codementors.finalProject.models;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table( name = "user")
+@Table(name = "user")
 public class LocalUser {
 
     @Id
@@ -35,6 +36,10 @@ public class LocalUser {
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+    @OneToMany
+    @JoinColumn(referencedColumnName = "id")
+    private List<Product> products;
 
     public LocalUser(){}
 
@@ -116,5 +121,13 @@ public class LocalUser {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
