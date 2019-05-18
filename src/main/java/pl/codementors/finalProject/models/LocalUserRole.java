@@ -1,6 +1,6 @@
 package pl.codementors.finalProject.models;
 
-public enum UserRole {
+public enum LocalUserRole {
     USER,
     ADMIN
 }

@@ -1,50 +1,55 @@
 package pl.codementors.finalProject.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table( name = "user")
-public class User {
+public class LocalUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String name;
 
     @Column
     private String surname;
 
-    @Column
+    @Column(unique = true)
     @Email
     private String login;
+
+    @Column
+    private String password;
 
     @Column
     private Boolean accepted;
 
     @Column
     @Enumerated(value = EnumType.STRING)
-    private UserRole role;
+    private LocalUserRole role;
 
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    public User(){}
+    public LocalUser(){}
 
-    public User(Long id, String name, String surname, String login, Boolean accepted, UserRole role) {
+    public LocalUser(Long id,
+                     String name,
+                     String surname,
+                     String login,
+                     String password,
+                     Boolean accepted,
+                     LocalUserRole role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.login = login;
+        this.password = password;
         this.accepted = accepted;
         this.role = role;
     }
@@ -81,6 +86,14 @@ public class User {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Boolean getAccepted() {
         return accepted;
     }
@@ -89,11 +102,11 @@ public class User {
         this.accepted = accepted;
     }
 
-    public UserRole getRole() {
+    public LocalUserRole getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(LocalUserRole role) {
         this.role = role;
     }
 
