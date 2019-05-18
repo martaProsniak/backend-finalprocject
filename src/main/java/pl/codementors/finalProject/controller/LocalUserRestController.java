@@ -3,9 +3,12 @@ package pl.codementors.finalProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.models.LocalUser;
+import pl.codementors.finalProject.security.SecurityConfig;
 import pl.codementors.finalProject.services.ProductService;
 import pl.codementors.finalProject.services.LocalUserService;
 
@@ -29,6 +32,11 @@ public class LocalUserRestController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    private LocalUser newUser = new LocalUser();
+
     @GetMapping(value={"", "/", "/home"})
     public String greet(){
         return "Welcome to our store!";
@@ -43,11 +51,16 @@ public class LocalUserRestController {
     public LocalUser getUserById (@PathVariable Long id) {
         return localUserService.findOne(id);
     }
-
+    
     @PostMapping("/users/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public LocalUser create (@RequestBody LocalUser localUser) {
-        return localUserService.createUser(localUser);
+    public LocalUser create (@RequestBody LocalUser userSent) {
+        newUser.setName(userSent.getName());
+        newUser.setSurname(userSent.getSurname());
+        newUser.setLogin(userSent.getLogin());
+        newUser.setPassword(passwordEncoder.encode(userSent.getPassword()));
+        newUser.setAccepted(userSent.getAccepted());
+        newUser.setRole(userSent.getRole());
+        return localUserService.createUser(newUser);
     }
 
     @PostMapping("/users/delete/{id}")

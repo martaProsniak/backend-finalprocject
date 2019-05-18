@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.codementors.finalProject.models.LocalUserRole;
 
 @Configuration
@@ -33,14 +34,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
      @Autowired
      public void configureGlobal(AuthenticationManagerBuilder auth) {
-          auth.authenticationProvider(authenticationProvider());
+          auth.authenticationProvider(authenticationProvider(passwordEncoder()));
      }
 
      @Bean
-     public DaoAuthenticationProvider authenticationProvider() {
+     public DaoAuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder) {
           DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
           authProvider.setUserDetailsService(localUserDetailsService);
-          authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+          authProvider.setPasswordEncoder(passwordEncoder);
           return authProvider;
+     }
+
+     @Bean
+     public PasswordEncoder passwordEncoder(){
+          return new BCryptPasswordEncoder();
      }
 }
