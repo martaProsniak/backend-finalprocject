@@ -20,7 +20,7 @@ public class Cart {
     @GeneratedValue
     private Long cartid;
 
-    @OneToMany(mappedBy = "cart" )
+    @OneToMany(mappedBy = "cart")
     private List<Product> products;
 
     @OneToOne(mappedBy = "cart")

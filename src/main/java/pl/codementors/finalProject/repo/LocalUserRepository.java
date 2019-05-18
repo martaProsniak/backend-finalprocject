@@ -14,4 +14,5 @@ import java.util.Optional;
 public interface LocalUserRepository extends CrudRepository<LocalUser, Long>{
     List<LocalUser> findAll();
     Optional<LocalUser> findByName(String userName);
+    LocalUser findOne(Long id);
 }

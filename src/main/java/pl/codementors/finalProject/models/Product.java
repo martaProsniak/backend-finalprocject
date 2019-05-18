@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -34,6 +36,10 @@ public class Product {
     @JoinColumn(referencedColumnName = "cartid")
     @JsonIgnore
     private Cart cart;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private LocalUser localUser;
 
     public Product() {
     }
@@ -100,5 +106,13 @@ public class Product {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public LocalUser getLocalUser() {
+        return localUser;
+    }
+
+    public void setLocalUser(LocalUser localUser) {
+        this.localUser = localUser;
     }
 }
