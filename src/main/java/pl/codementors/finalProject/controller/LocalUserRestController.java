@@ -51,7 +51,7 @@ public class LocalUserRestController {
     public LocalUser getUserById (@PathVariable Long id) {
         return localUserService.findOne(id);
     }
-    
+
     @PostMapping("/users/add")
     public LocalUser create (@RequestBody LocalUser userSent) {
         newUser.setName(userSent.getName());
