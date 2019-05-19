@@ -1,5 +1,6 @@
 package pl.codementors.finalProject.controller;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.services.CartServiceImpl;
 
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
@@ -22,8 +24,10 @@ public class CartRestController {
     @Autowired
     private CartServiceImpl cartService;
 
+    private Principal principal;
+
     @GetMapping(value = "list")
-    public List<Cart> getCarts(){
+    public List<Cart> getCarts() throws Exception {
         return cartService.getCarts();
     }
 
@@ -33,19 +37,19 @@ public class CartRestController {
     }
 
     @DeleteMapping(value = "delete/{cartId}")
-    public void deleteCart(@PathVariable("cartId") Long cartId){
+    public void deleteCart(@PathVariable("cartId") Long cartId) throws Exception {
         cartService.deleteCart(cartId);
     }
 
     @PutMapping(value = "{cartId}/deleteProduct/{productId}")
     public Cart deleteFromCart(@PathVariable("cartId") Long cartId,
-                               @PathVariable("productId") Long productId) {
-        return cartService.deleFromCart(cartId, productId);
+                               @PathVariable("productId") Long productId) throws Exception {
+        return cartService.deleteFromCart(cartId, productId);
     }
 
     @PutMapping(value = "{cartId}/addProduct/{productId}")
     public Cart addProduct(@PathVariable("cartId") Long cartId,
-                           @PathVariable("productId") Long productId){
+                           @PathVariable("productId") Long productId) throws Exception {
         return cartService.addProductToCart(cartId, productId);
     }
 }
