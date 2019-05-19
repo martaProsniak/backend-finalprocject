@@ -2,17 +2,11 @@ package pl.codementors.finalProject.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.models.LocalUser;
-import pl.codementors.finalProject.security.SecurityConfig;
-import pl.codementors.finalProject.services.ProductService;
 import pl.codementors.finalProject.services.LocalUserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,15 +18,8 @@ import java.util.List;
 @RestController
 public class LocalUserRestController {
 
-    //TODO try to move field to service
-    private List<Product> products = new ArrayList<>();
-
     @Autowired
     private LocalUserService localUserService;
-
-    @Autowired
-    private ProductService productService;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -53,14 +40,7 @@ public class LocalUserRestController {
 
     @PostMapping("/users/add")
     public LocalUser create (@RequestBody LocalUser userSent) {
-        LocalUser newUser = new LocalUser();
-        newUser.setName(userSent.getName());
-        newUser.setSurname(userSent.getSurname());
-        newUser.setLogin(userSent.getLogin());
-        newUser.setPassword(passwordEncoder.encode(userSent.getPassword()));
-        newUser.setAccepted(userSent.getAccepted());
-        newUser.setRole(userSent.getRole());
-        return localUserService.createUser(newUser);
+        return localUserService.createUser(userSent, passwordEncoder);
     }
 
     @PostMapping("/users/delete/{id}")
@@ -84,7 +64,8 @@ public class LocalUserRestController {
     }
 
     @PutMapping("/users/{userId}/setCart/{cartId}")
-    public LocalUser addCart(@PathVariable("userId") Long userId, @PathVariable("cartId") Long cartId){
+    public LocalUser addCart(@PathVariable("userId") Long userId,
+                             @PathVariable("cartId") Long cartId){
        return localUserService.addCart(userId, cartId);
     }
 }
