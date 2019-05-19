@@ -1,11 +1,11 @@
 package pl.codementors.finalProject.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.LocalUserRepository;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -20,23 +20,24 @@ public class LocalUserServiceImpl implements LocalUserService {
 
     @Autowired
     private LocalUserRepository localUserRepository;
-
     @Autowired
     private CartRepository cartRepository;
 
-
-    public LocalUserServiceImpl(LocalUserRepository localUserRepository) {
-        this.localUserRepository = localUserRepository;
-    }
-
     @Override
     public List<LocalUser> findAllUsers() {
-        return (List<LocalUser>) localUserRepository.findAll();
+        return localUserRepository.findAll();
     }
 
     @Override
-    public LocalUser createUser(LocalUser localUser) {
-        return localUserRepository.save(localUser);
+    public LocalUser createUser(LocalUser userSent, PasswordEncoder passwordEncoder) {
+        LocalUser newUser = new LocalUser();
+        newUser.setName(userSent.getName());
+        newUser.setSurname(userSent.getSurname());
+        newUser.setLogin(userSent.getLogin());
+        newUser.setPassword(passwordEncoder.encode(userSent.getPassword()));
+        newUser.setAccepted(userSent.getAccepted());
+        newUser.setRole(userSent.getRole());
+        return localUserRepository.save(newUser);
     }
 
     @Override
