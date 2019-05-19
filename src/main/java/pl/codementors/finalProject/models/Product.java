@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -15,21 +16,23 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "product_id")
     private Long id;
 
-    @Column
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
+    @Column(name = "price", nullable = false)
+    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
     private double price;
 
-    @Column
+    @Column(name = "available")
     private boolean available;
 
-    @Column
+    @Column(name = "url")
     private String url;
 
     @ManyToOne
