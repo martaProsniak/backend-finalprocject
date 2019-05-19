@@ -36,8 +36,6 @@ public class LocalUserRestController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private LocalUser newUser = new LocalUser();
-
     @GetMapping(value={"", "/", "/home"})
     public String greet(){
         return "Welcome to our store!";
@@ -55,6 +53,7 @@ public class LocalUserRestController {
 
     @PostMapping("/users/add")
     public LocalUser create (@RequestBody LocalUser userSent) {
+        LocalUser newUser = new LocalUser();
         newUser.setName(userSent.getName());
         newUser.setSurname(userSent.getSurname());
         newUser.setLogin(userSent.getLogin());
