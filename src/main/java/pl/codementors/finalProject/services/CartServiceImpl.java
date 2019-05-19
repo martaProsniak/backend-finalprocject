@@ -39,7 +39,9 @@ public class CartServiceImpl implements CartService {
     public Cart addProductToCart(Long cartId, Long productId) {
         Cart cart = cartRepository.findOne(cartId);
         Product product = productRepository.findOne(productId);
-        cart.addProduct(product);
+        List<Product> products = cart.getProducts();
+        products.add(product);
+        cart.setProducts(products);
         product.setCart(cart);
         cartRepository.save(cart);
         return cart;
@@ -49,7 +51,9 @@ public class CartServiceImpl implements CartService {
     public Cart deleFromCart(Long cartId, Long productId) {
         Cart cart = cartRepository.findOne(cartId);
         Product product = productRepository.findOne(productId);
-        cart.removeProduct(product);
+        List<Product> products = cart.getProducts();
+        products.remove(product);
+        cart.setProducts(products);
         product.setCart(null);
         cartRepository.save(cart);
         return cart;
