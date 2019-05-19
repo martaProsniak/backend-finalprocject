@@ -19,20 +19,19 @@ public class Product {
     @Column (name = "product_id")
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column
     private String name;
 
-    @Column(name = "description")
+    @Column
     private String description;
 
-    @Column(name = "price", nullable = false)
-    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
+    @Column
     private double price;
 
-    @Column(name = "available")
+    @Column
     private boolean available;
 
-    @Column(name = "url")
+    @Column
     private String url;
 
     @ManyToOne
