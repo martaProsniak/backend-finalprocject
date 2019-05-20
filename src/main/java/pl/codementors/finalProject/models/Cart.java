@@ -26,7 +26,19 @@ public class Cart {
     @OneToOne(mappedBy = "cart")
     private LocalUser localUser;
 
-    public Cart(){}
+    private double price; //stores product copy price while ordering
+
+    @OneToOne(targetEntity = Product.class, fetch = FetchType.EAGER)
+    private Product product;
+
+    public Cart() {
+    }
+
+    public Cart(Product product) {
+        this.product = product;
+        System.out.println("Price" + product.getPrice());
+        this.price = product.getPrice();
+    }
 
     public Cart(Long id) {
         this.cartid = id;
@@ -54,6 +66,22 @@ public class Cart {
 
     public void setLocalUser(LocalUser localUser) {
         this.localUser = localUser;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Cart addProduct(Product product) {
