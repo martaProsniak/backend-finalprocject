@@ -1,8 +1,10 @@
 package pl.codementors.finalProject.services;
 
+import pl.codementors.finalProject.models.Order;
 import pl.codementors.finalProject.models.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface ProductService {
@@ -18,4 +20,5 @@ public interface ProductService {
     void deleteProduct(Long id);
 
     Product addProductToUser(Long productId, Long userId);
+
 }
