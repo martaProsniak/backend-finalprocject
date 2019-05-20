@@ -3,12 +3,7 @@ package pl.codementors.finalProject.models;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -28,16 +23,27 @@ public class Cart {
 
     private double price; //stores product copy price while ordering
 
+    private int quantity;
+
     @OneToOne(targetEntity = Product.class, fetch = FetchType.EAGER)
     private Product product;
 
     public Cart() {
     }
 
-    public Cart(Product product) {
+    public Cart(int quantity, Product product) {
+        this.quantity = quantity;
         this.product = product;
         System.out.println("Price" + product.getPrice());
         this.price = product.getPrice();
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Cart(Long id) {

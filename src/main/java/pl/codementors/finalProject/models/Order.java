@@ -42,6 +42,13 @@ public class Order {
     public Order() {
     }
 
+    public void calculateOrderTotalPrice() {
+        double price = this.cartList.stream().
+                mapToDouble(x -> x.getPrice()*x.getQuantity())
+                .sum();
+        setOrderTotalPrice(price);
+    }
+
 
     public Long getOrderid() {
         return orderid;
