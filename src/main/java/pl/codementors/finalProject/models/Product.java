@@ -2,6 +2,7 @@ package pl.codementors.finalProject.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -35,12 +36,12 @@ public class Product {
     private String url;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "cartid")
+    @JoinColumn(name = "cartid")
     @JsonIgnore
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "id")
     private LocalUser localUser;
 
     public Product() {

@@ -1,5 +1,9 @@
 package pl.codementors.finalProject.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -7,6 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties(value={ "cart", "products" }, allowGetters= true)
 public class LocalUser {
 
     @Id
@@ -34,11 +40,13 @@ public class LocalUser {
     private LocalUserRole role;
 
     @OneToOne
+    @JsonProperty
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToMany
-    @JoinColumn(referencedColumnName = "id")
+    @OneToMany(mappedBy = "localUser")
+    @ElementCollection
+    @JsonProperty
     private List<Product> products;
 
     public LocalUser(){}
