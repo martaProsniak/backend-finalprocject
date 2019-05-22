@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class LocalUser {
 
     @Id
@@ -39,9 +40,7 @@ public class LocalUser {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonProperty
-    @JsonBackReference
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 
     public LocalUser(){}
