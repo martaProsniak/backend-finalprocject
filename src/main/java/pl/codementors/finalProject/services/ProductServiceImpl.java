@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
         LocalUser localUser = localUserRepository.findOne(userId);
         List<Product> products = localUser.getProducts();
         products.add(product);
-        product.setLocalUser(localUser);
+        product.setSeller(localUser);
         localUser.setProducts(products);
         productRepository.save(product);
         return product;

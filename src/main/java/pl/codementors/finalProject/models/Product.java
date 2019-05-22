@@ -1,18 +1,12 @@
 package pl.codementors.finalProject.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Product {
 
     @Id
@@ -41,8 +35,9 @@ public class Product {
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    private LocalUser localUser;
+    @JoinColumn(name = "seller", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"products", "password"})
+    private LocalUser seller;
 
     public Product() {
     }
@@ -111,11 +106,11 @@ public class Product {
         this.cart = cart;
     }
 
-    public LocalUser getLocalUser() {
-        return localUser;
+    public LocalUser getSeller() {
+        return seller;
     }
 
-    public void setLocalUser(LocalUser localUser) {
-        this.localUser = localUser;
+    public void setSeller(LocalUser seller) {
+        this.seller = seller;
     }
 }
