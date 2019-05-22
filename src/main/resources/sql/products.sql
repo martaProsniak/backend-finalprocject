@@ -1,5 +1,5 @@
 -- String name, String description, double price, boolean available
-INSERT INTO products(NAME, DESCRIPTION, PRICE, AVAILABLE, URL, CARTID, ID) VALUES
+INSERT INTO products(NAME, DESCRIPTION, PRICE, AVAILABLE, URL, CARTID, SELLER) VALUES
 ('Samsung', 'SAMSUNG Galaxy A7 2018, 64 GB, Dual SIM ', 1027, false, 'https://ecsmedia.pl/c/smartfon-samsung-galaxy-a7-2018-64-gb-dual-sim-p-iext53532447.jpg', NULL, 1),
 ('Samsung', 'SAMSUNG Galaxy A50, 128 GB, Dual SIM ', 1329, true,'https://ecsmedia.pl/c/smartfon-samsung-galaxy-a50-128-gb-dual-sim-p-iext54490386.jpg', NULL, 1),
 ('Samsung', 'SAMSUNG Galaxy S9, 64 GB, Dual SIM ', 2179, true,'https://ecsmedia.pl/c/smartfon-samsung-galaxy-s9-64-gb-dual-sim-p-iext52926022.jpg', NULL, 2),
