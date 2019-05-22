@@ -2,7 +2,6 @@ package pl.codementors.finalProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.codementors.finalProject.Exceptions.ResourceNotFoundException;
 import pl.codementors.finalProject.models.Order;
 import pl.codementors.finalProject.services.OrderService;
 
@@ -26,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping(path = "/")
-    public Order saveOrder(@RequestBody Order order) throws ResourceNotFoundException {
+    public Order saveOrder(@RequestBody Order order) {
         return orderService.addOrder(order);
     }
 

@@ -1,10 +1,8 @@
 package pl.codementors.finalProject.models;
 
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,34 +19,17 @@ public class Order {
 
     private double orderTotalPrice;
 
-    private boolean paymentStatus;
-
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
-
-    @OneToMany(targetEntity = Cart.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = Cart.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Cart> cartList;
 
     public Order(@NotNull(message = "Login is mandatory") String login,
-                 double orderTotalPrice, boolean paymentStatus,
-                 List<Cart> cartList) {
+                 double orderTotalPrice) {
         this.login = login;
         this.orderTotalPrice = orderTotalPrice;
-        this.paymentStatus = paymentStatus;
-        this.cartList = cartList;
     }
 
     public Order() {
     }
-
-    public void calculateOrderTotalPrice() {
-        double price = this.cartList.stream().
-                mapToDouble(x -> x.getPrice()*x.getQuantity())
-                .sum();
-        setOrderTotalPrice(price);
-    }
-
 
     public Long getOrderid() {
         return orderid;
@@ -74,21 +55,6 @@ public class Order {
         this.orderTotalPrice = orderTotalPrice;
     }
 
-    public boolean isPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(boolean paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
 
     public List<Cart> getCartList() {
         return cartList;
