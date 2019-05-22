@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.*;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class LocalUser {
 
     @Id
@@ -41,7 +41,8 @@ public class LocalUser {
     private Cart cart;
 
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> products;
+    @JsonIgnoreProperties(value = "seller")
+    private List<Product> products = new ArrayList<>();
 
     public LocalUser(){}
 

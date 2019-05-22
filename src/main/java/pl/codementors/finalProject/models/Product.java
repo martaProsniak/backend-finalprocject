@@ -1,6 +1,7 @@
 package pl.codementors.finalProject.models;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import javax.persistence.*;
 
@@ -35,7 +36,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "seller", referencedColumnName = "id")
-    @JsonManagedReference
+    @JsonIgnoreProperties(value = {"products", "password"})
     private LocalUser seller;
 
     public Product() {
