@@ -22,8 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      @Override
      protected void configure(HttpSecurity http) throws Exception {
           http
-                  .cors()
-                  .and()
                   .csrf().disable()
                   .authorizeRequests()
                   .antMatchers("/users**").hasRole(LocalUserRole.ADMIN.name())
@@ -36,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                   .and()
                   .logout()
                   .deleteCookies("JSESSIONID");
+
+          http.cors();
      }
 
      @Autowired
