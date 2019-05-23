@@ -22,14 +22,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      @Override
      protected void configure(HttpSecurity http) throws Exception {
           http
-                  .authorizeRequests()
+                  .csrf().disable()
+                  .cors()
+                  .and().authorizeRequests()
                   .antMatchers("/users**").hasRole(LocalUserRole.ADMIN.name())
-                  .antMatchers("/products**").permitAll()
+                  .antMatchers("/products**", "/login").permitAll()
                   .antMatchers("/cart**").hasRole(LocalUserRole.USER.name())
-                  .and().csrf().disable()
-                  .httpBasic().and()
-                  .logout().and()
-                  .formLogin().loginPage("/home");
+                  .anyRequest().authenticated()
+                  .and().formLogin()
+                  .and().logout()
+                  .deleteCookies("JSESSIONID");
      }
 
      @Autowired
