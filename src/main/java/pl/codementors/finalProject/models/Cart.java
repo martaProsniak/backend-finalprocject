@@ -56,15 +56,28 @@ public class Cart {
         this.localUser = localUser;
     }
 
-    public Cart addProduct(Product product) {
-        Cart cart = new Cart();
-        products.add(product);
-        cart.setProducts(products);
-        return cart;
+    @Override
+    public String toString() {
+        return "Cart{" + "cartid=" + cartid + ", products=" + products + ", localUser=" + localUser + '}';
     }
 
-    public List<Product> removeProduct(Product product) {
-        products.remove(product);
-        return products;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cart cart = (Cart) o;
+
+        if (cartid != null ? !cartid.equals(cart.cartid) : cart.cartid != null) return false;
+        if (products != null ? !products.equals(cart.products) : cart.products != null) return false;
+        return localUser != null ? localUser.equals(cart.localUser) : cart.localUser == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = cartid != null ? cartid.hashCode() : 0;
+        result = 31 * result + (products != null ? products.hashCode() : 0);
+        result = 31 * result + (localUser != null ? localUser.hashCode() : 0);
+        return result;
     }
 }
