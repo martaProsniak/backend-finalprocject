@@ -22,16 +22,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      @Override
      protected void configure(HttpSecurity http) throws Exception {
           http
-                  .csrf().disable()
                   .cors()
-                  .and().authorizeRequests()
+                  .and()
+                  .csrf().disable()
+                  .authorizeRequests()
                   .antMatchers("/users**").hasRole(LocalUserRole.ADMIN.name())
                   .antMatchers("/products", "/login").permitAll()
                   .antMatchers("/cart**").hasRole(LocalUserRole.USER.name())
                   .anyRequest().authenticated()
-                  .and().formLogin()
+                  .and()
+                  .formLogin()
                   .defaultSuccessUrl("/products", true)
-                  .and().logout()
+                  .and()
+                  .logout()
                   .deleteCookies("JSESSIONID");
      }
 
