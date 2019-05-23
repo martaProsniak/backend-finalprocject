@@ -24,11 +24,29 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-    @PostMapping(path = "/")
-    public Order saveOrder(@RequestBody Order order) {
-        return orderService.addOrder(order);
+    @PutMapping(path = "/add")
+    public Order addOrder(@PathVariable Long cartId) {
+        return orderService.addOrder(cartId);
     }
+
+    /*
+    //napisać add order jak niżej
+
+     */
+
+
 
     @DeleteMapping(path = "/{id}")
     public void deleteOrder(@PathVariable Long id) {orderService.deleteOrder(id);}
 }
+/*
+    @RequestMapping(value = "/indexorder", method = RequestMethod.GET)
+    public String indexPage(ModelMap modelMap, HttpServletRequest request) {
+        modelMap.addAttribute("orderNo", orderDetailService.get(1));
+        modelMap.addAttribute("products", productService.list());
+        modelMap.addAttribute("customers", customerService.list());
+        modelMap.addAttribute("em", request.getParameter("em"));
+        return "indexorder";
+
+
+ */

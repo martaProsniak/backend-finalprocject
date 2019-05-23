@@ -20,7 +20,7 @@ public class Order {
     private double orderTotalPrice;
 
     @OneToOne(targetEntity = Cart.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<Cart> cartList;
+    private Cart cartList;
 
     public Order(@NotNull(message = "Login is mandatory") String login,
                  double orderTotalPrice) {
@@ -55,12 +55,11 @@ public class Order {
         this.orderTotalPrice = orderTotalPrice;
     }
 
-
-    public List<Cart> getCartList() {
+    public Cart getCartList() {
         return cartList;
     }
 
-    public void setCartList(List<Cart> cartList) {
+    public void setCartList(Cart cartList) {
         this.cartList = cartList;
     }
 
@@ -75,5 +74,11 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(orderid);
+    }
+
+    public Order addCartToOrder (Cart cart) {
+        Order order = new Order();
+        order.setCartList(cartList);
+        return order;
     }
 }

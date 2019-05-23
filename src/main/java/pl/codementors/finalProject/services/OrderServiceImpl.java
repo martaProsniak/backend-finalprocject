@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.Order;
+import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.OrderRepository;
 import pl.codementors.finalProject.repo.ProductRepository;
 
@@ -18,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     OrderRepository orderRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    CartRepository cartRepository;
 
     @Override
     public Order getOrder(Long id) {
@@ -32,11 +33,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addOrder(Order order) {
-            order.getCartList().stream().forEach(x->updateCart(x));
-            return orderRepository.save(order);
+    public Order addOrder(Long cartId) {
+        Order order = new Order();
+        Cart cart = cartRepository.findOne(cartId);
+        order.addCartToOrder(cart);
+        cart.setOrder(order);
+        orderRepository.save(order);
+        return order;
     }
-
 
     @Override
     public void deleteOrder (Long id) {
@@ -50,4 +54,5 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderServiceImpl() {
     }
+
 }

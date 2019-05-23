@@ -1,6 +1,7 @@
 package pl.codementors.finalProject.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -20,6 +21,11 @@ public class Cart {
 
     @OneToOne(mappedBy = "cart")
     private LocalUser localUser;
+
+    @OneToOne
+    @JoinColumn(referencedColumnName = "orderid")
+    @JsonIgnore
+    private Order order;
 
     public Cart() {
     }
@@ -50,6 +56,14 @@ public class Cart {
 
     public void setLocalUser(LocalUser localUser) {
         this.localUser = localUser;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Cart addProduct(Product product) {
