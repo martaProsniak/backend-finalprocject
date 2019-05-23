@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                   .antMatchers("/cart**").hasRole(LocalUserRole.USER.name())
                   .anyRequest().authenticated()
                   .and().formLogin()
+                  .defaultSuccessUrl("/products", true)
                   .and().logout()
                   .deleteCookies("JSESSIONID");
      }
