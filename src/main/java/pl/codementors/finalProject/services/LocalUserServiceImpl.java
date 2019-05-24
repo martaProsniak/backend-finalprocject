@@ -41,8 +41,14 @@ public class LocalUserServiceImpl implements LocalUserService {
     }
 
     @Override
-    public LocalUser editUser(LocalUser localUser) {
-        return localUserRepository.save(localUser);
+    public LocalUser editUser(Long id, LocalUser userSent) {
+       LocalUser editedLocalUser = localUserRepository.findOne(id);
+       editedLocalUser.setName(userSent.getName());
+       editedLocalUser.setSurname(userSent.getSurname());
+       editedLocalUser.setLogin(userSent.getLogin());
+       editedLocalUser.setPassword(userSent.getPassword());
+       editedLocalUser.setRole(userSent.getRole());
+       return localUserRepository.save(editedLocalUser);
     }
 
     @Override

@@ -22,10 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      @Override
      protected void configure(HttpSecurity http) throws Exception {
           http
+                  .cors().and()
                   .authorizeRequests()
-                  .antMatchers("/users**").hasRole(LocalUserRole.ADMIN.name())
+                  .antMatchers("/users**").permitAll()
                   .antMatchers("/products**").permitAll()
-                  .antMatchers("/cart**").hasRole(LocalUserRole.USER.name())
+                  .antMatchers("/cart**").permitAll()
                   .and().csrf().disable()
                   .httpBasic().and()
                   .logout().and()

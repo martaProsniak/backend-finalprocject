@@ -13,7 +13,7 @@ public interface LocalUserService {
 
     List<LocalUser> findAllUsers();
     LocalUser createUser (LocalUser localUser, PasswordEncoder passwordEncoder);
-    LocalUser editUser(LocalUser localUser);
+    LocalUser editUser(Long id, LocalUser localUser);
     void deleteUser (Long id);
     void activateUser(Long id);
     void deactivateUser (Long id);

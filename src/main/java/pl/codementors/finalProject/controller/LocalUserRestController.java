@@ -49,8 +49,8 @@ public class LocalUserRestController {
     }
 
     @PostMapping("/users/edit/{id}")
-    public LocalUser edit (@RequestBody LocalUser localUser) {
-        return localUserService.editUser(localUser);
+    public LocalUser edit (@PathVariable Long id, @RequestBody LocalUser localUser) {
+        return localUserService.editUser(id, localUser);
     }
 
     @PostMapping("/users/activate/{id}")
