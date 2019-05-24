@@ -76,9 +76,4 @@ public class Order {
         return Objects.hash(orderid);
     }
 
-    public Order addCartToOrder (Cart cart) {
-        Order order = new Order();
-        order.setCartList(cartList);
-        return order;
-    }
 }
