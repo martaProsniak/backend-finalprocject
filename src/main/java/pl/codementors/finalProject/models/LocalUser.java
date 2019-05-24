@@ -37,7 +37,7 @@ public class LocalUser {
 
     @OneToOne
     @JsonProperty
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "cartid")
     private Cart cart;
 
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

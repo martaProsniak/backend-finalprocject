@@ -74,10 +74,6 @@ public class LocalUserServiceImpl implements LocalUserService {
         return localUserRepository.findOne(id);
     }
 
-    public LocalUser addCart(Long userId, Long cartId) {
-        localUserRepository.findOne(userId).setCart(cartRepository.findOne(cartId));
-        return localUserRepository.save(localUserRepository.findOne(userId));
-    }
 
     @Override
     public Optional<LocalUser> findByName(String userName) {

@@ -18,6 +18,5 @@ public interface LocalUserService {
     void activateUser(Long id);
     void deactivateUser (Long id);
     LocalUser findOne(Long id);
-    LocalUser addCart(Long userId, Long cartId);
     Optional<LocalUser> findByName(String userName);
 }

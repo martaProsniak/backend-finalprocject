@@ -36,7 +36,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "seller", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"products", "password"})
+    @JsonIgnoreProperties(value = {"products", "password", "cart"})
     private LocalUser seller;
 
     public Product() {

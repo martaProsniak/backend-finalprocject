@@ -7,6 +7,7 @@ import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,7 +40,16 @@ public class CartServiceImpl implements CartService {
     public Cart addProductToCart(Long cartId, Long productId) {
         Cart cart = cartRepository.findOne(cartId);
         Product product = productRepository.findOne(productId);
-        cart.addProduct(product);
+
+        List<Product> productsInCart;
+        if (cart.getProducts()==null){
+            productsInCart = new ArrayList<>();
+            productsInCart.add(product);
+            cart.setProducts(productsInCart);
+        } else {
+            productsInCart = cart.getProducts();
+            productsInCart.add(product);
+        }
         product.setCart(cart);
         cartRepository.save(cart);
         return cart;
@@ -49,7 +59,7 @@ public class CartServiceImpl implements CartService {
     public Cart deleFromCart(Long cartId, Long productId) {
         Cart cart = cartRepository.findOne(cartId);
         Product product = productRepository.findOne(productId);
-        cart.removeProduct(product);
+        cart.getProducts().remove(product);
         product.setCart(null);
         cartRepository.save(cart);
         return cart;

@@ -62,10 +62,4 @@ public class LocalUserRestController {
     public void deactivate (@PathVariable Long id) {
         localUserService.deactivateUser(id);
     }
-
-    @PutMapping("/users/{userId}/setCart/{cartId}")
-    public LocalUser addCart(@PathVariable("userId") Long userId,
-                             @PathVariable("cartId") Long cartId){
-       return localUserService.addCart(userId, cartId);
-    }
 }

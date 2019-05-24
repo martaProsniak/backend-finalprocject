@@ -56,15 +56,4 @@ public class Cart {
         this.localUser = localUser;
     }
 
-    public Cart addProduct(Product product) {
-        Cart cart = new Cart();
-        products.add(product);
-        cart.setProducts(products);
-        return cart;
-    }
-
-    public List<Product> removeProduct(Product product) {
-        products.remove(product);
-        return products;
-    }
 }
