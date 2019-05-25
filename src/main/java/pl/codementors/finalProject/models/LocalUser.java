@@ -35,9 +35,9 @@ public class LocalUser {
     @Enumerated(value = EnumType.STRING)
     private LocalUserRole role;
 
-    @OneToOne
+    @OneToOne(mappedBy = "buyer")
     @JsonProperty
-    @JoinColumn(name = "cartid")
+    @JsonIgnoreProperties(value = "buyer")
     private Cart cart;
 
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

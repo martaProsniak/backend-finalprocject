@@ -1,7 +1,6 @@
 package pl.codementors.finalProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/cart/")
+@RequestMapping(value = "/cart")
 public class CartRestController {
 
     @Autowired
@@ -28,47 +27,37 @@ public class CartRestController {
     @Autowired
     private LocalUserService localUserService;
 
-    @GetMapping(value = "list")
+    @GetMapping(value = "/list")
     public List<Cart> getCarts() {
         return cartService.getCarts();
     }
 
-    @PostMapping(value = "add")
-    public Cart createCart() {
-        return cartService.addCart();
-    }
 
-    @DeleteMapping(value = "delete/{cartId}")
+    @DeleteMapping(value = "/delete/{cartId}")
     public void deleteCart(@PathVariable("cartId") Long cartId) {
         cartService.deleteCart(cartId);
     }
 
-    @PutMapping(value = "{cartId}/deleteProduct/{productId}")
+    @PutMapping(value = "/{cartId}/deleteProduct/{productId}")
     public Cart deleteFromCart(@PathVariable("cartId") Long cartId,
                                @PathVariable("productId") Long productId) {
         return cartService.deleFromCart(cartId, productId);
     }
 
-    @PutMapping(value = "{cartId}/addProduct/{productId}")
-    public Cart addProduct(@PathVariable("cartId") Long cartId,
-                           @PathVariable("productId") Long productId) {
-        return cartService.addProductToCart(cartId, productId);
-    }
-
-    @PostMapping("users/{userId}/product/{productId}")
-    public Cart addToCart(@PathVariable Long userId, @PathVariable Long productId) {
+    @PostMapping("/add/product/{productId}/{userId}")
+    public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId) {
         Cart cart;
-        LocalUser localUser = localUserService.findOne(userId);
-        if (localUser.getCart() == null) {
+        LocalUser buyer = localUserService.findOne(userId);
+        if (buyer.getCart() == null) {
             cart = cartService.addCart();
         } else {
-            cart = localUser.getCart();
+            cart = buyer.getCart();
         }
         Long cartId = cart.getId();
         cartService.addProductToCart(cartId, productId);
-        cart.setLocalUser(localUser);
-        localUser.setCart(cart);
-        localUserService.editUser(userId, localUser);
+        cart.setBuyer(buyer);
+        buyer.setCart(cart);
+        localUserService.editUser(userId, buyer);
         return cart;
     }
 
