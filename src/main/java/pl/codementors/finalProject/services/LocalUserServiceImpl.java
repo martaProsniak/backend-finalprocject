@@ -7,6 +7,7 @@ import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.LocalUserRepository;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,20 +30,47 @@ public class LocalUserServiceImpl implements LocalUserService {
     }
 
     @Override
-    public LocalUser createUser(LocalUser userSent, PasswordEncoder passwordEncoder) {
+    public LocalUser createUser(LocalUser userSent,
+                                PasswordEncoder passwordEncoder) {
+
         LocalUser newUser = new LocalUser();
+
         newUser.setName(userSent.getName());
         newUser.setSurname(userSent.getSurname());
         newUser.setLogin(userSent.getLogin());
         newUser.setPassword(passwordEncoder.encode(userSent.getPassword()));
         newUser.setAccepted(userSent.getAccepted());
         newUser.setRole(userSent.getRole());
+
         return localUserRepository.save(newUser);
     }
 
     @Override
-    public LocalUser editUser(LocalUser localUser) {
-        return localUserRepository.save(localUser);
+    public LocalUser editUser(LocalUser localUser,
+                              Long id,
+                              Principal principal)
+            throws Exception {
+
+        String loggedUserName = principal.getName();
+        LocalUser found = localUserRepository.findOne(id);
+
+        if(!found
+                .getLogin()
+                .equals(localUserRepository
+                        .findByName(loggedUserName)
+                        .get()
+                        .getLogin()))
+        {
+            throw new Exception("Cannot edit other user data");
+        }
+
+        found.setSurname(localUser.getSurname());
+        found.setProducts(localUser.getProducts());
+        found.setCart(localUser.getCart());
+        found.setAccepted(localUser.getAccepted());
+        found.setRole(localUser.getRole());
+
+        return localUserRepository.save(found);
     }
 
     @Override
@@ -69,7 +97,9 @@ public class LocalUserServiceImpl implements LocalUserService {
     }
 
     public LocalUser addCart(Long userId, Long cartId) {
-        localUserRepository.findOne(userId).setCart(cartRepository.findOne(cartId));
+        localUserRepository
+                .findOne(userId)
+                .setCart(cartRepository.findOne(cartId));
         return localUserRepository.save(localUserRepository.findOne(userId));
     }
 

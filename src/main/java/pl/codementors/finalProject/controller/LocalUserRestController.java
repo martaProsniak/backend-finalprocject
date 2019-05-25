@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.services.LocalUserService;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -49,8 +50,12 @@ public class LocalUserRestController {
     }
 
     @PostMapping("/users/edit/{id}")
-    public LocalUser edit (@RequestBody LocalUser localUser) {
-        return localUserService.editUser(localUser);
+    public LocalUser edit (@RequestBody LocalUser localUser,
+                           @PathVariable Long id,
+                           Principal principal)
+    throws Exception
+    {
+        return localUserService.editUser(localUser, id, principal);
     }
 
     @PostMapping("/users/activate/{id}")

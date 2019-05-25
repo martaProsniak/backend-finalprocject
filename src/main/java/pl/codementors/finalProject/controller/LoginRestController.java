@@ -15,7 +15,6 @@ import pl.codementors.finalProject.services.LocalUserService;
 
 import java.util.Optional;
 
-@CrossOrigin
 @RestController
 public class LoginRestController {
 
