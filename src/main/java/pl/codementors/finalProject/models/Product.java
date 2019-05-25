@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -36,7 +37,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "seller", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"products", "password"})
+    @JsonIgnoreProperties(value = {"products", "password", "cart"})
     private LocalUser seller;
 
     public Product() {

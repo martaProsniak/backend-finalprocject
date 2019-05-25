@@ -7,6 +7,7 @@ import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.LocalUserRepository;
 import pl.codementors.finalProject.repo.ProductRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -43,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addProductToUser(Long productId, Long userId) {
+    public Product addProductToUser(Long productId, Long userId){
         Product product = productRepository.findOne(productId);
         LocalUser localUser = localUserRepository.findOne(userId);
         List<Product> products = localUser.getProducts();

@@ -11,45 +11,61 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.codementors.finalProject.models.Cart;
+import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.services.CartServiceImpl;
+import pl.codementors.finalProject.services.LocalUserService;
 
 import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/cart/")
+@RequestMapping(value = "/cart")
 public class CartRestController {
 
     @Autowired
     private CartServiceImpl cartService;
 
-    private Principal principal;
+    @Autowired
+    private LocalUserService localUserService;
 
-    @GetMapping(value = "list")
-    public List<Cart> getCarts() throws Exception {
+    @GetMapping(value = "/list")
+    public List<Cart> getCarts() {
         return cartService.getCarts();
     }
 
-    @PostMapping(value = "add")
-    public Cart createCart(){
-        return cartService.addCart();
-    }
 
-    @DeleteMapping(value = "delete/{cartId}")
-    public void deleteCart(@PathVariable("cartId") Long cartId) throws Exception {
+    @DeleteMapping(value = "/delete/{cartId}")
+    public void deleteCart(@PathVariable("cartId") Long cartId) {
         cartService.deleteCart(cartId);
     }
 
-    @PutMapping(value = "{cartId}/deleteProduct/{productId}")
+    @PutMapping(value = "/{cartId}/deleteProduct/{productId}")
     public Cart deleteFromCart(@PathVariable("cartId") Long cartId,
-                               @PathVariable("productId") Long productId) throws Exception {
-        return cartService.deleteFromCart(cartId, productId);
+                               @PathVariable("productId") Long productId) {
+        return cartService.deleFromCart(cartId, productId);
     }
 
-    @PutMapping(value = "{cartId}/addProduct/{productId}")
-    public Cart addProduct(@PathVariable("cartId") Long cartId,
-                           @PathVariable("productId") Long productId) throws Exception {
-        return cartService.addProductToCart(cartId, productId);
+    @PostMapping("/add/product/{productId}/{userId}")
+    public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId) {
+        Cart cart;
+        LocalUser buyer = localUserService.findOne(userId);
+        if (buyer.getCart() == null) {
+            cart = cartService.addCart();
+        } else {
+            cart = buyer.getCart();
+        }
+        Long cartId = cart.getId();
+        cartService.addProductToCart(cartId, productId);
+        cart.setBuyer(buyer);
+        buyer.setCart(cart);
+        localUserService.editUser(userId, buyer);
+        return cart;
     }
+
+    @GetMapping("/{id}")
+    public Cart getCartById (@PathVariable Long id) {
+        return cartService.findOne(id);
+    }
+
 }
