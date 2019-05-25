@@ -22,15 +22,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      @Override
      protected void configure(HttpSecurity http) throws Exception {
           http
-                  .cors().and()
+                  .csrf().disable()
                   .authorizeRequests()
                   .antMatchers("/users**").permitAll()
-                  .antMatchers("/products**").permitAll()
+                  .antMatchers("/***").permitAll()
                   .antMatchers("/cart**").permitAll()
-                  .and().csrf().disable()
-                  .httpBasic().and()
-                  .logout().and()
-                  .formLogin().loginPage("/home");
+                  .anyRequest().authenticated()
+                  .and()
+                  .formLogin()
+                  .defaultSuccessUrl("/products", true)
+                  .and()
+                  .logout()
+                  .deleteCookies("JSESSIONID");
+
+          http.cors();
      }
 
      @Autowired

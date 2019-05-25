@@ -1,5 +1,6 @@
 package pl.codementors.finalProject.controller;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.services.CartServiceImpl;
 import pl.codementors.finalProject.services.LocalUserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
@@ -59,6 +61,11 @@ public class CartRestController {
         buyer.setCart(cart);
         localUserService.editUser(userId, buyer);
         return cart;
+    }
+
+    @GetMapping("/{id}")
+    public Cart getCartById (@PathVariable Long id) {
+        return cartService.findOne(id);
     }
 
 }

@@ -24,13 +24,7 @@ public class Cart {
     @JsonIgnoreProperties(value = {"products", "password"})
     private LocalUser buyer;
 
-    @OneToOne
-    @JoinColumn(referencedColumnName = "orderid")
-    @JsonIgnore
-    private Order order;
-
-    public Cart() {
-    }
+    public Cart(){}
 
     public Cart(Long id) {
         this.cartid = id;
@@ -58,25 +52,6 @@ public class Cart {
 
     public void setBuyer(LocalUser buyer) {
         this.buyer = buyer;
-    }
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Cart addProduct(Product product) {
-        Cart cart = new Cart();
-        products.add(product);
-        cart.setProducts(products);
-        return cart;
-    }
-
-    public List<Product> removeProduct(Product product) {
-        products.remove(product);
-        return products;
     }
 
 }
