@@ -47,7 +47,7 @@ public class CartRestController {
     }
 
     @PostMapping("/add/product/{productId}/{userId}")
-    public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId) {
+    public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId, Principal principal) throws Exception {
         Cart cart;
         LocalUser buyer = localUserService.findOne(userId);
         if (buyer.getCart() == null) {
@@ -59,7 +59,7 @@ public class CartRestController {
         cartService.addProductToCart(cartId, productId);
         cart.setBuyer(buyer);
         buyer.setCart(cart);
-        localUserService.editUser(userId, buyer);
+        localUserService.editUser(buyer, userId, principal);
         return cart;
     }
 

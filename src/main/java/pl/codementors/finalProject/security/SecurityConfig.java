@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import pl.codementors.finalProject.models.LocalUserRole;
 
 @Configuration
@@ -37,13 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                   .antMatchers("/", "/users**").hasRole(LocalUserRole.ADMIN.name())
                   .antMatchers("/products", "/login", "/users/add").permitAll()
                   .antMatchers("/cart**").hasRole(LocalUserRole.USER.name())
-                  .anyRequest().authenticated()
+                  .anyRequest()
+                  .authenticated()
                   .and()
-                  .formLogin()
-                  //.defaultSuccessUrl("/products", true)
-                  .and()
-                  .logout()
-                  .deleteCookies("JSESSIONID");
+                  .httpBasic();
      }
 
      @Autowired
