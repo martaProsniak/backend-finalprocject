@@ -13,7 +13,7 @@ public interface ProductService {
 
     Product findOne(Long id);
 
-    Product addProduct(Product product);
+    Product addProduct(Product product, Long id);
 
     Product editProduct(Product product);
 

@@ -25,10 +25,9 @@ public class ProductRestController {
         return productService.findOne(id);
     }
 
-    @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product addProduct(@RequestBody Product userProduct) {
-        return productService.addProduct(userProduct);
+    @PostMapping("/add/{id}")
+    public Product addProduct(@PathVariable Long id, @RequestBody Product userProduct) {
+        return productService.addProduct(userProduct, id);
     }
 
     @PutMapping("/edit/{id}")

@@ -49,20 +49,7 @@ public class CartRestController {
 
     @PostMapping("/add/product/{productId}/{userId}")
     public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId) {
-        Cart cart;
-        LocalUser buyer = localUserService.findOne(userId);
-        if (buyer.getCart() == null) {
-            cart = cartService.addCart();
-        } else {
-            cart = buyer.getCart();
-        }
-        Long cartId = cart.getId();
-        cartService.addProductToCart(cartId, productId);
-        cart.setCartValue(cartService.calculate(cart.getProducts()));
-        cart.setBuyer(buyer);
-        buyer.setCart(cart);
-        localUserService.editUser(userId, buyer);
-        return cart;
+        return  cartService.addProductToCart(userId, productId);
     }
 
     @GetMapping("/{id}")

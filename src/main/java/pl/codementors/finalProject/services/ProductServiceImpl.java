@@ -29,7 +29,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addProduct(Product product) {
+    public Product addProduct(Product product, Long id) {
+        LocalUser seller = localUserRepository.findOne(id);
+        product.setSeller(seller);
         return productRepository.save(product);
     }
 
