@@ -28,9 +28,9 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-   @PostMapping(path = "/add")
-    public Order addOrder() {
-        return orderService.addOrder();
+   @PostMapping(path = "/add/{cartId}")
+    public Order addOrder(@PathVariable Long cartId, @RequestParam String address) {
+        return orderService.addOrder(cartId, address);
     }
 
     @DeleteMapping(path = "/{id}")

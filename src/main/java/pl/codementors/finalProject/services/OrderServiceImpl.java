@@ -42,8 +42,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addOrder() {
+    public Order addOrder(Long id, String address) {
         Order order = new Order();
+        order.setCart(cartRepository.findOne(id));
+        order.setOrderTotalPrice(order.getCart().getCartValue());
+        order.setLogin(order.getCart().getBuyer().getLogin());
+        order.setAddress(address);
         orderRepository.save(order);
         return order;
     }
@@ -53,10 +57,6 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.delete(id);
     }
 
-    @Override
-    public void updateCart(Cart x) {
-
-    }
 
     public OrderServiceImpl() {
     }
