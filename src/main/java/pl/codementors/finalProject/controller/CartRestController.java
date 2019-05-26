@@ -57,6 +57,7 @@ public class CartRestController {
         }
         Long cartId = cart.getId();
         cartService.addProductToCart(cartId, productId);
+        cart.setCartValue(cartService.calculate(cart.getProducts()));
         cart.setBuyer(buyer);
         buyer.setCart(cart);
         localUserService.editUser(userId, buyer);

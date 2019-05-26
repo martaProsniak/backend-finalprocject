@@ -69,4 +69,13 @@ public class CartServiceImpl implements CartService {
     public Cart findOne(Long id) {
         return this.cartRepository.findOne(id);
     }
+
+    @Override
+    public Double calculate(List<Product> products) {
+        Double sum = 0.0;
+        for (Product p : products) {
+            sum += p.getPrice();
+        }
+        return sum;
+    }
 }

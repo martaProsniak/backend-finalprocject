@@ -17,6 +17,9 @@ public class Cart {
     @GeneratedValue
     private Long cartid;
 
+    @Column
+    private Double cartValue;
+
     @OneToMany(mappedBy = "cart")
     private List<Product> products;
 
@@ -54,4 +57,11 @@ public class Cart {
         this.buyer = buyer;
     }
 
+    public Double getCartValue() {
+        return cartValue;
+    }
+
+    public void setCartValue(Double cartValue) {
+        this.cartValue = cartValue;
+    }
 }
