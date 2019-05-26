@@ -34,15 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
           http
                   .authorizeRequests()
-                  .antMatchers("/", "/users**").permitAll()
-                  .antMatchers("/products**", "/login", "/users/add").permitAll()
-                  .antMatchers("/cart**").permitAll()
+                  .antMatchers("/**").permitAll()
+                  .anyRequest()
+                  .authenticated()
                   .and()
-                  .formLogin()
-                  //.defaultSuccessUrl("/products", true)
-                  .and()
-                  .logout()
-                  .deleteCookies("JSESSIONID");
+                  .httpBasic();
      }
 
      @Autowired

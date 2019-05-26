@@ -51,6 +51,7 @@ public class CartServiceImpl implements CartService {
             productsInCart.add(product);
         }
         product.setCart(cart);
+        product.setAvailable(false);
         cartRepository.save(cart);
         return cart;
     }
@@ -61,6 +62,7 @@ public class CartServiceImpl implements CartService {
         Product product = productRepository.findOne(productId);
         cart.getProducts().remove(product);
         product.setCart(null);
+        cart.setCartValue(calculate(cart.getProducts()));
         cartRepository.save(cart);
         return cart;
     }

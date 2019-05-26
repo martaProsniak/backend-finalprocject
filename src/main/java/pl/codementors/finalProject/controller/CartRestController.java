@@ -14,6 +14,7 @@ import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.services.CartServiceImpl;
 import pl.codementors.finalProject.services.LocalUserService;
+import pl.codementors.finalProject.services.ProductService;
 
 import java.security.Principal;
 import java.util.List;
