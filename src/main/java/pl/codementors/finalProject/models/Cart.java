@@ -20,10 +20,10 @@ public class Cart {
     @Column
     private Double cartValue;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
 
-    @OneToOne
+    @OneToOne(mappedBy = "cart")
     @JsonIgnoreProperties(value = {"products", "password"})
     private LocalUser buyer;
 

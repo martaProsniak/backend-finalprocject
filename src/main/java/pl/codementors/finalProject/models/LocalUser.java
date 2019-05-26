@@ -35,7 +35,7 @@ public class LocalUser {
     @Enumerated(value = EnumType.STRING)
     private LocalUserRole role;
 
-    @OneToOne(mappedBy = "buyer")
+    @OneToOne (cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonProperty
     @JsonIgnoreProperties(value = "buyer")
     private Cart cart;
