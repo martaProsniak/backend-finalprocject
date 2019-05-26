@@ -15,17 +15,24 @@ public class Order {
     private Long orderid;
 
     @Basic(optional = false)
+    @Column(name = "login")
     private String login;
 
+    @Column(name = "total")
     private double orderTotalPrice;
 
+    @Column(name="address")
+    private String address;
+
     @OneToOne(targetEntity = Cart.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Cart cartList;
+    private Cart cart;
 
     public Order(@NotNull(message = "Login is mandatory") String login,
-                 double orderTotalPrice) {
+                 double orderTotalPrice,
+                 String address) {
         this.login = login;
         this.orderTotalPrice = orderTotalPrice;
+        this.address = address;
     }
 
     public Order() {
@@ -55,12 +62,20 @@ public class Order {
         this.orderTotalPrice = orderTotalPrice;
     }
 
-    public Cart getCartList() {
-        return cartList;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setCartList(Cart cartList) {
-        this.cartList = cartList;
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
