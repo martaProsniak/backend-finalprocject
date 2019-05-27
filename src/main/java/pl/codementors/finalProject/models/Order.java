@@ -23,7 +23,7 @@ public class Order {
     @Column(name="address")
     private String address;
 
-    @OneToOne(targetEntity = Cart.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = Cart.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Cart cart;
 
     public Order(@NotNull(message = "Login is mandatory") String login,

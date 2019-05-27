@@ -40,12 +40,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addOrder(Long id, String address) {
-        Order order = new Order();
-        order.setCart(cartRepository.findOne(id));
-        order.setValue(order.getCart().getCartValue());
-        order.setLogin(order.getCart().getBuyer().getLogin());
-        order.setAddress(address);
+    public Order addOrder(Order sentOrder) {
+        Order order = sentOrder;
         orderRepository.save(order);
         return order;
     }

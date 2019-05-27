@@ -11,7 +11,7 @@ public interface OrderService {
 
     Order getOrder(Long id);
     List<Order> getAllOrders();
-    Order addOrder(Long id, String address);
+    Order addOrder(Order order);
     void deleteOrder(Long id);
     Order addCartToOrder(Long cartId, Long orderId);
 
