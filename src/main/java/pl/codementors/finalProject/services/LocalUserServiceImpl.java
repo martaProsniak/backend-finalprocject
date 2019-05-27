@@ -53,6 +53,7 @@ public class LocalUserServiceImpl implements LocalUserService {
         editedLocalUser.setLogin(userSent.getLogin());
         editedLocalUser.setPassword(userSent.getPassword());
         editedLocalUser.setRole(userSent.getRole());
+        editedLocalUser.setCart(userSent.getCart());
         return localUserRepository.save(editedLocalUser);
     }
 

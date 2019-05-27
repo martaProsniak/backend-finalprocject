@@ -1,6 +1,8 @@
 package pl.codementors.finalProject.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -24,6 +26,7 @@ public class Order {
     private String address;
 
     @OneToOne(targetEntity = Cart.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(value = {"cartValue", "buyer", "order"})
     private Cart cart;
 
     public Order(@NotNull(message = "Login is mandatory") String login,

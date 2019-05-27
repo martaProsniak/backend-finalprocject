@@ -1,7 +1,6 @@
 package pl.codementors.finalProject.services;
 
 
-import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.Order;
 
 
@@ -14,5 +13,5 @@ public interface OrderService {
     Order addOrder(Order order);
     void deleteOrder(Long id);
     Order addCartToOrder(Long cartId, Long orderId);
-
+    List<Order> getOrdersByLogin(Long id);
 }
