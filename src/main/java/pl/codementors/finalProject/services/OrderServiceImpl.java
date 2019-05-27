@@ -2,12 +2,10 @@ package pl.codementors.finalProject.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.Order;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.LocalUserRepository;
 import pl.codementors.finalProject.repo.OrderRepository;
-import pl.codementors.finalProject.repo.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     public Order addOrder(Long id, String address) {
         Order order = new Order();
         order.setCart(cartRepository.findOne(id));
-        order.setOrderTotalPrice(order.getCart().getCartValue());
+        order.setValue(order.getCart().getCartValue());
         order.setLogin(order.getCart().getBuyer().getLogin());
         order.setAddress(address);
         orderRepository.save(order);

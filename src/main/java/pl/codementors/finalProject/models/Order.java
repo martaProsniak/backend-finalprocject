@@ -3,7 +3,6 @@ package pl.codementors.finalProject.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +18,7 @@ public class Order {
     private String login;
 
     @Column(name = "total")
-    private double orderTotalPrice;
+    private double value;
 
     @Column(name="address")
     private String address;
@@ -28,10 +27,10 @@ public class Order {
     private Cart cart;
 
     public Order(@NotNull(message = "Login is mandatory") String login,
-                 double orderTotalPrice,
+                 double value,
                  String address) {
         this.login = login;
-        this.orderTotalPrice = orderTotalPrice;
+        this.value = value;
         this.address = address;
     }
 
@@ -54,12 +53,12 @@ public class Order {
         this.login = login;
     }
 
-    public double getOrderTotalPrice() {
-        return orderTotalPrice;
+    public double getValue() {
+        return value;
     }
 
-    public void setOrderTotalPrice(double orderTotalPrice) {
-        this.orderTotalPrice = orderTotalPrice;
+    public void setValue(double value) {
+        this.value = value;
     }
 
     public Cart getCart() {
