@@ -32,8 +32,8 @@ public class ProductRestController {
     }
 
     @PutMapping("/edit/{id}")
-    public Product editProduct(@RequestBody Product product) {
-        return productService.editProduct(product);
+    public Product editProduct(@PathVariable Long id, @RequestBody Product product) {
+        return productService.editProduct(id, product);
     }
 
     @DeleteMapping("/delete/{id}")

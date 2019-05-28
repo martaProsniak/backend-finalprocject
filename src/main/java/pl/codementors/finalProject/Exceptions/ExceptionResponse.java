@@ -1,15 +1,25 @@
 package pl.codementors.finalProject.Exceptions;
 
-import java.time.LocalDateTime;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class ExceptionResponse extends RuntimeException {
 
-    private LocalDateTime timestamp;
-    private String message;
-    private String details;
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class ExceptionResponse extends Exception {
 
-    public ExceptionResponse(LocalDateTime now, String message, String description) {
+    String message;
+
+    public ExceptionResponse(String exceptionMessage, String message) {
+        super(message);
+        this.message = message;
     }
 
+    @Override
+    public String getMessage() {
+        return message;
+    }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

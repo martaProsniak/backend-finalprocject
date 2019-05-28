@@ -19,7 +19,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public final ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException exception,
                                                              WebRequest request) {
-        ExceptionResponse response = new ExceptionResponse(LocalDateTime.now(), exception.getMessage(),
+        ExceptionResponse response = new ExceptionResponse(exception.getMessage(),
                 request.getDescription(true));
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 

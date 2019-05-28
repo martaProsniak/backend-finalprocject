@@ -2,6 +2,7 @@ package pl.codementors.finalProject.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.codementors.finalProject.Exceptions.ExceptionResponse;
 import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.LocalUserRepository;
@@ -37,8 +38,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product editProduct(Product product) {
-        return productRepository.save(product);
+    public Product editProduct(Long id, Product product) {
+        Product productUpdated = productRepository.findOne(id);
+
+        productUpdated.setName(product.getName());
+        productUpdated.setDescription(product.getDescription());
+        productUpdated.setPrice(product.getPrice());
+        productUpdated.setAvailable(product.getAvailable());
+        productUpdated.setUrl(product.getUrl());
+        productUpdated.setSeller(product.getSeller());
+
+        return productRepository.save(productUpdated);
     }
 
     @Override
