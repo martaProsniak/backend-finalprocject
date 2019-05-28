@@ -21,6 +21,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findOne(Long id) {
         return productRepository.findOne(id);
+
     }
 
     @Override

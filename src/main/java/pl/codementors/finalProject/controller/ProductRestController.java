@@ -23,6 +23,7 @@ public class ProductRestController {
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.findOne(id);
+
     }
 
     @PostMapping("/add/{id}")

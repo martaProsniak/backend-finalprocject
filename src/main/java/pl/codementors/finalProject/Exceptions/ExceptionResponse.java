@@ -2,7 +2,7 @@ package pl.codementors.finalProject.Exceptions;
 
 import java.time.LocalDateTime;
 
-public class ExceptionResponse {
+public class ExceptionResponse extends RuntimeException {
 
     private LocalDateTime timestamp;
     private String message;
@@ -10,4 +10,6 @@ public class ExceptionResponse {
 
     public ExceptionResponse(LocalDateTime now, String message, String description) {
     }
+
+
 }
