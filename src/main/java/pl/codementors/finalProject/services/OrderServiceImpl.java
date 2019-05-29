@@ -3,7 +3,6 @@ package pl.codementors.finalProject.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.codementors.finalProject.models.Cart;
-import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.models.Order;
 import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.CartRepository;
@@ -28,9 +27,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private LocalUserRepository localUserRepository;
-
-    private Order order;
-
 
     @Override
     public Order getOrder(Long id) {
@@ -69,18 +65,5 @@ public class OrderServiceImpl implements OrderService {
     public Order addCartToOrder(Long cartId, Long orderId) {
         return null;
     }
-    /*
-    @Override
-    public Order addCartToOrder(Long cartId, Long orderId) {
-        Order order = new Order();
-        Cart cart = cartRepository.findOne(cartId);
-        cart.setOrder(order);
-        orderRepository.save(order);
-        return order;
-    }
-
-
- */
-
 
 }

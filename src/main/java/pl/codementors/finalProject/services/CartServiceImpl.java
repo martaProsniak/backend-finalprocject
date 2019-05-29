@@ -85,6 +85,17 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public boolean emptyCart(Long id) {
+
+        if (cartRepository.findOne(id) != null) {
+            cartRepository.delete(cartRepository.findOne(id).getId());
+            return true;
+        } else  {
+            return false;
+        }
+    }
+
+    @Override
     public Cart findOne(Long id) {
         return this.cartRepository.findOne(id);
     }

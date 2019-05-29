@@ -13,4 +13,5 @@ public interface CartService {
     Cart deleFromCart(Long cartId, Long productId);
     Cart findOne (Long id);
     Double calculate(List<Product> products);
+    boolean emptyCart(Long id);
 }
