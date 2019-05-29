@@ -67,4 +67,13 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
         return product;
     }
+
+    @Override
+    public List<Product> findAllForJsonView() {
+      List<Product> productsForJson = productRepository.findAll();
+        for (Product p : productsForJson) {
+            p.setSeller(null);
+        }
+        return productsForJson;
+    }
 }

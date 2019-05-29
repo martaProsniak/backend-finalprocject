@@ -9,6 +9,8 @@ public interface ProductService {
 
     List<Product> findAll();
 
+    List<Product> findAllForJsonView();
+
     Product findOne(Long id);
 
     Product addProduct(Product product, Long id);

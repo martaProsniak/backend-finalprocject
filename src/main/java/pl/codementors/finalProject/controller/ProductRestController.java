@@ -20,6 +20,11 @@ public class ProductRestController {
         return productService.findAll();
     }
 
+    @GetMapping("/json")
+    public List<Product> getProductsForJson() {
+        return productService.findAllForJsonView();
+    }
+
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.findOne(id);
