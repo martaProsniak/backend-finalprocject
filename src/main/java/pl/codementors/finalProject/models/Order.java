@@ -18,7 +18,7 @@ public class Order implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "buyer", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"products", "password", "cart"})
+    @JsonIgnoreProperties(value = {"products", "password", "cart", "orders"})
     private LocalUser buyer;
 
     @Column(name = "total")
