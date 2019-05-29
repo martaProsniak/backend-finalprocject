@@ -44,6 +44,10 @@ public class LocalUser {
     @JsonIgnoreProperties(value = "seller")
     private List<Product> products = new ArrayList<>();
 
+    @OneToMany(mappedBy = "buyer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "buyer")
+    private List<Order> orders = new ArrayList<>();
+
     public LocalUser(){}
 
     public LocalUser(Long id,
@@ -132,5 +136,13 @@ public class LocalUser {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -27,10 +27,6 @@ public class Cart {
     @JsonIgnoreProperties(value = {"products", "password"})
     private LocalUser buyer;
 
-    @OneToOne(mappedBy = "cart")
-    @JsonIgnore
-    private Order order;
-
     public Cart(){}
 
     public Cart(Long id) {

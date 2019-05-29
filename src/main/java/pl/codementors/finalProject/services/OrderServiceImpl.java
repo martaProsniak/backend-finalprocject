@@ -2,11 +2,15 @@ package pl.codementors.finalProject.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.codementors.finalProject.models.Cart;
+import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.models.Order;
+import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.LocalUserRepository;
 import pl.codementors.finalProject.repo.OrderRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -40,8 +44,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addOrder(Order sentOrder) {
-        Order order = sentOrder;
+    public Order addOrder(Long cartid, Order sentOrder) {
+        Order order = new Order();
+        Cart cart = cartRepository.findOne(cartid);
+        order.setBuyer(cart.getBuyer());
+        order.setValue(cart.getCartValue());
+        order.setAddress(sentOrder.getAddress());
+        List<Product> itemList = new ArrayList<>(cart.getProducts());
+        order.setItems(itemList);
         orderRepository.save(order);
         return order;
     }
