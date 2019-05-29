@@ -33,11 +33,6 @@ public class OrderController {
         return orderService.addOrder(id, sentOrder);
     }
 
-    @GetMapping(path = "/user/{id}")
-    public List<Order> getOrdersByLogin(@PathVariable Long id) {
-        return orderService.getOrdersByLogin(id);
-    }
-
     @DeleteMapping(path = "/{id}")
     public void deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);}

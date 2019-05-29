@@ -13,5 +13,4 @@ public interface OrderService {
     Order addOrder(Long cartId, Order order);
     void deleteOrder(Long id);
     Order addCartToOrder(Long cartId, Long orderId);
-    List<Order> getOrdersByLogin(Long id);
 }
