@@ -29,7 +29,7 @@ public class Order implements Serializable {
 
     @ElementCollection
     @Column(name="items")
-    @JsonIgnoreProperties(value = {"seller", "cart"})
+    @JsonIgnoreProperties(value = {"seller", "cart", "buyer"})
     private List<Product> items;
 
     public Order(LocalUser buyer, double value, String address, List<Product> items) {

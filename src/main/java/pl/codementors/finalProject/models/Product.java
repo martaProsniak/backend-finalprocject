@@ -29,14 +29,14 @@ public class Product {
     @Column
     private String url;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "cartid")
     @JsonIgnore
     private Cart cart;
 
     @ManyToOne
     @JoinColumn(name = "seller", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"products", "password", "cart"})
+    @JsonIgnoreProperties(value = {"products", "password", "cart", "orders"})
     private LocalUser seller;
 
     public Product() {
