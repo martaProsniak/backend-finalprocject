@@ -10,7 +10,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import pl.codementors.finalProject.controller.ProductRestController;
 
 import javax.persistence.EntityNotFoundException;
-import java.time.LocalDateTime;
 
 @RestController
 @ControllerAdvice(assignableTypes= ProductRestController.class)
@@ -22,7 +21,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionResponse response = new ExceptionResponse(exception.getMessage(),
                 request.getDescription(true));
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-
     }
 }
 

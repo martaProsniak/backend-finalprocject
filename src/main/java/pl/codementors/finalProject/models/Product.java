@@ -42,7 +42,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, double price, boolean available, String url) {
+    public Product(String name,
+                   String description,
+                   double price,
+                   boolean available,
+                   String url) {
         this.name = name;
         this.description = description;
         this.price = price;

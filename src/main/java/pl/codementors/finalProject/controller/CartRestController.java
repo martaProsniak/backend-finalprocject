@@ -15,7 +15,6 @@ public class CartRestController {
 
     @Autowired
     private CartServiceImpl cartService;
-
     @Autowired
     private LocalUserService localUserService;
 
@@ -23,7 +22,6 @@ public class CartRestController {
     public List<Cart> getCarts() {
         return cartService.getCarts();
     }
-
 
     @DeleteMapping(value = "/delete/{cartId}")
     public void deleteCart(@PathVariable("cartId") Long cartId) {
@@ -37,7 +35,8 @@ public class CartRestController {
     }
 
     @PostMapping("/add/product/{productId}/{userId}")
-    public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId) {
+    public Cart addToCart(@PathVariable ("userId")Long userId,
+                          @PathVariable ("productId") Long productId) {
         return  cartService.addProductToCart(userId, productId);
     }
 
@@ -45,5 +44,4 @@ public class CartRestController {
     public Cart getCartById (@PathVariable Long id) {
         return cartService.findOne(id);
     }
-
 }
