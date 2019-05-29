@@ -1,7 +1,6 @@
 package pl.codementors.finalProject.models;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import javax.persistence.*;
 
@@ -30,14 +29,14 @@ public class Product {
     @Column
     private String url;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "cartid")
     @JsonIgnore
     private Cart cart;
 
     @ManyToOne
     @JoinColumn(name = "seller", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"products", "password", "cart"})
+    @JsonIgnoreProperties(value = {"products", "password", "cart", "orders"})
     private LocalUser seller;
 
     public Product() {
@@ -89,6 +88,10 @@ public class Product {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public boolean getAvailable() {
+        return available;
     }
 
     public String getUrl() {

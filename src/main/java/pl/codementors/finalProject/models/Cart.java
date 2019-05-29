@@ -17,11 +17,14 @@ public class Cart {
     @GeneratedValue
     private Long cartid;
 
-    @OneToMany(mappedBy = "cart")
+    @Column
+    private Double cartValue;
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Product> products;
 
-    @OneToOne
-    @JsonIgnoreProperties(value = {"products", "password"})
+    @OneToOne(mappedBy = "cart")
+    @JsonIgnoreProperties(value = {"products", "password", "orders"})
     private LocalUser buyer;
 
     public Cart(){}
@@ -54,4 +57,11 @@ public class Cart {
         this.buyer = buyer;
     }
 
+    public Double getCartValue() {
+        return cartValue;
+    }
+
+    public void setCartValue(Double cartValue) {
+        this.cartValue = cartValue;
+    }
 }

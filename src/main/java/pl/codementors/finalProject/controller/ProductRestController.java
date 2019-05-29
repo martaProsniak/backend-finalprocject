@@ -23,17 +23,17 @@ public class ProductRestController {
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
         return productService.findOne(id);
+
     }
 
-    @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product addProduct(@RequestBody Product userProduct) {
-        return productService.addProduct(userProduct);
+    @PostMapping("/add/{id}")
+    public Product addProduct(@PathVariable Long id, @RequestBody Product userProduct) {
+        return productService.addProduct(userProduct, id);
     }
 
     @PutMapping("/edit/{id}")
-    public Product editProduct(@RequestBody Product product) {
-        return productService.editProduct(product);
+    public Product editProduct(@PathVariable Long id, @RequestBody Product product) {
+        return productService.editProduct(id, product);
     }
 
     @DeleteMapping("/delete/{id}")

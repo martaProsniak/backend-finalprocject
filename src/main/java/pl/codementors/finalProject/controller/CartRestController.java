@@ -1,21 +1,11 @@
 package pl.codementors.finalProject.controller;
 
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.codementors.finalProject.models.Cart;
-import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.services.CartServiceImpl;
 import pl.codementors.finalProject.services.LocalUserService;
 
-import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
@@ -47,20 +37,8 @@ public class CartRestController {
     }
 
     @PostMapping("/add/product/{productId}/{userId}")
-    public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId, Principal principal) throws Exception {
-        Cart cart;
-        LocalUser buyer = localUserService.findOne(userId);
-        if (buyer.getCart() == null) {
-            cart = cartService.addCart();
-        } else {
-            cart = buyer.getCart();
-        }
-        Long cartId = cart.getId();
-        cartService.addProductToCart(cartId, productId);
-        cart.setBuyer(buyer);
-        buyer.setCart(cart);
-        localUserService.editUser(buyer, userId, principal);
-        return cart;
+    public Cart addToCart(@PathVariable ("userId")Long userId, @PathVariable ("productId") Long productId) {
+        return  cartService.addProductToCart(userId, productId);
     }
 
     @GetMapping("/{id}")

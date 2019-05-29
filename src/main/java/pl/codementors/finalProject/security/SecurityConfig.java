@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import pl.codementors.finalProject.models.LocalUserRole;
+
 
 @Configuration
 @EnableWebSecurity
@@ -39,14 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
           http
                   .authorizeRequests()
-                  .antMatchers("/", "/users**").hasRole(LocalUserRole.ADMIN.name())
-                  .antMatchers("/products**", "/login", "/users/add").permitAll()
-                  .antMatchers("/cart**").hasRole(LocalUserRole.USER.name())
+                  .antMatchers("/**").permitAll()
                   .anyRequest()
                   .authenticated()
                   .and()
                   .httpBasic();
      }
+
 
      @Bean
      public CorsConfigurationSource corsConfigurationSource() {
@@ -59,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           source.registerCorsConfiguration("/**", config);
           return source;
      }
+
 
      @Bean
      public DaoAuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder) {

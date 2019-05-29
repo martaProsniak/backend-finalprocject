@@ -46,31 +46,15 @@ public class LocalUserServiceImpl implements LocalUserService {
     }
 
     @Override
-    public LocalUser editUser(LocalUser localUser,
-                              Long id,
-                              Principal principal)
-            throws Exception {
-
-        String loggedUserName = principal.getName();
-        LocalUser found = localUserRepository.findOne(id);
-
-        if(!found
-                .getLogin()
-                .equals(localUserRepository
-                        .findByName(loggedUserName)
-                        .get()
-                        .getLogin()))
-        {
-            throw new Exception("Cannot edit other user data");
-        }
-
-        found.setSurname(localUser.getSurname());
-        found.setProducts(localUser.getProducts());
-        found.setCart(localUser.getCart());
-        found.setAccepted(localUser.getAccepted());
-        found.setRole(localUser.getRole());
-
-        return localUserRepository.save(found);
+    public LocalUser editUser(Long id, LocalUser userSent) {
+        LocalUser editedLocalUser = localUserRepository.findOne(id);
+        editedLocalUser.setName(userSent.getName());
+        editedLocalUser.setSurname(userSent.getSurname());
+        editedLocalUser.setLogin(userSent.getLogin());
+        editedLocalUser.setPassword(userSent.getPassword());
+        editedLocalUser.setRole(userSent.getRole());
+        editedLocalUser.setCart(userSent.getCart());
+        return localUserRepository.save(editedLocalUser);
     }
 
     @Override

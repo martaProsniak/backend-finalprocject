@@ -1,19 +1,17 @@
 package pl.codementors.finalProject.services;
 
 
-import pl.codementors.finalProject.models.Cart;
 import pl.codementors.finalProject.models.Order;
 
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
 
     Order getOrder(Long id);
     List<Order> getAllOrders();
-    Order addOrder();
+    Order addOrder(Long cartId, Order order);
     void deleteOrder(Long id);
-    void updateCart (Cart x);
-    Order addCartToOrder(Long cartId, Long orderId);
-
+    List<Order> findByBuyer(Long id);
 }

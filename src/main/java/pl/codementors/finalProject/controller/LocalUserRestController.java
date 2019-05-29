@@ -51,11 +51,9 @@ public class LocalUserRestController {
 
     @PostMapping("/users/edit/{id}")
     public LocalUser edit (@RequestBody LocalUser localUser,
-                           @PathVariable Long id,
-                           Principal principal)
-    throws Exception
+                           @PathVariable Long id)
     {
-        return localUserService.editUser(localUser, id, principal);
+        return localUserService.editUser(id, localUser);
     }
 
     @PostMapping("/users/activate/{id}")

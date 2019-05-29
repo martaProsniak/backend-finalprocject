@@ -3,13 +3,16 @@ package pl.codementors.finalProject.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.codementors.finalProject.models.Cart;
+import pl.codementors.finalProject.models.LocalUser;
 import pl.codementors.finalProject.models.Order;
+import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.LocalUserRepository;
 import pl.codementors.finalProject.repo.OrderRepository;
-import pl.codementors.finalProject.repo.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -27,9 +30,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private LocalUserRepository localUserRepository;
 
-    private Order order;
-
-
     @Override
     public Order getOrder(Long id) {
         return orderRepository.findOne(id);
@@ -42,10 +42,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addOrder() {
+    public Order addOrder(Long cartid, Order sentOrder) {
         Order order = new Order();
+        Cart cart = cartRepository.findOne(cartid);
+        order.setBuyer(cart.getBuyer());
+        order.setValue(cart.getCartValue());
+        order.setAddress(sentOrder.getAddress());
+        List<Product> itemList = new ArrayList<>(cart.getProducts());
+        order.setItems(itemList);
         orderRepository.save(order);
         return order;
+    }
+
+    @Override
+    public List<Order> findByBuyer(Long id) {
+        LocalUser buyer = localUserRepository.findOne(id);
+        return orderRepository.findOrderByBuyer(buyer);
     }
 
     @Override
@@ -53,30 +65,8 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.delete(id);
     }
 
-    @Override
-    public void updateCart(Cart x) {
-
-    }
 
     public OrderServiceImpl() {
     }
-
-    @Override
-    public Order addCartToOrder(Long cartId, Long orderId) {
-        return null;
-    }
-    /*
-    @Override
-    public Order addCartToOrder(Long cartId, Long orderId) {
-        Order order = new Order();
-        Cart cart = cartRepository.findOne(cartId);
-        cart.setOrder(order);
-        orderRepository.save(order);
-        return order;
-    }
-
-
- */
-
 
 }

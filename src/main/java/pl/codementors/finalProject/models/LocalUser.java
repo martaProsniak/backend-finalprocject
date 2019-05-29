@@ -35,7 +35,7 @@ public class LocalUser {
     @Enumerated(value = EnumType.STRING)
     private LocalUserRole role;
 
-    @OneToOne(mappedBy = "buyer")
+    @OneToOne (cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonProperty
     @JsonIgnoreProperties(value = "buyer")
     private Cart cart;
@@ -43,6 +43,10 @@ public class LocalUser {
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "seller")
     private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "buyer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "buyer")
+    private List<Order> orders = new ArrayList<>();
 
     public LocalUser(){}
 
@@ -132,5 +136,13 @@ public class LocalUser {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

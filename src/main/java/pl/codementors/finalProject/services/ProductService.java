@@ -1,10 +1,8 @@
 package pl.codementors.finalProject.services;
 
-import pl.codementors.finalProject.models.Order;
 import pl.codementors.finalProject.models.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface ProductService {
@@ -13,9 +11,9 @@ public interface ProductService {
 
     Product findOne(Long id);
 
-    Product addProduct(Product product);
+    Product addProduct(Product product, Long id);
 
-    Product editProduct(Product product);
+    Product editProduct(Long id, Product product);
 
     void deleteProduct(Long id);
 
