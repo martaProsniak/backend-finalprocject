@@ -5,6 +5,7 @@ import pl.codementors.finalProject.models.Order;
 
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
 
@@ -12,5 +13,5 @@ public interface OrderService {
     List<Order> getAllOrders();
     Order addOrder(Long cartId, Order order);
     void deleteOrder(Long id);
-    Order addCartToOrder(Long cartId, Long orderId);
+    List<Order> findByBuyer(Long id);
 }

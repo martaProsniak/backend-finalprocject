@@ -7,6 +7,7 @@ import pl.codementors.finalProject.services.CartService;
 import pl.codementors.finalProject.services.OrderService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
@@ -22,6 +23,12 @@ public class OrderController {
     public Order getOrder(@PathVariable Long id) {
         return orderService.getOrder(id);
     }
+
+    @GetMapping(path = "/user/{id}")
+    public List<Order> getOrderByBuyer(@PathVariable Long id) {
+        return orderService.findByBuyer(id);
+    }
+
 
     @GetMapping(path = "/")
     public List<Order> getAllOrders() {
