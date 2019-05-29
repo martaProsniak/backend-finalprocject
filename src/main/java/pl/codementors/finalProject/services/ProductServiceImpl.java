@@ -9,6 +9,7 @@ import pl.codementors.finalProject.repo.LocalUserRepository;
 import pl.codementors.finalProject.repo.ProductRepository;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PostPersist;
 import java.util.List;
 
 @Service

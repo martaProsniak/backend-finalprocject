@@ -7,7 +7,6 @@ import pl.codementors.finalProject.services.CartService;
 import pl.codementors.finalProject.services.OrderService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
@@ -15,7 +14,6 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
-
     @Autowired
     CartService cartService;
 
@@ -29,21 +27,20 @@ public class OrderController {
         return orderService.findByBuyer(id);
     }
 
-
     @GetMapping(path = "/")
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
    @PostMapping(path = "/add/cart/{id}")
-    public Order addOrder(@PathVariable Long id, @RequestBody Order sentOrder) {
+    public Order addOrder(@PathVariable Long id,
+                          @RequestBody Order sentOrder) {
         Order order = orderService.addOrder(id, sentOrder);
         return order;
     }
 
     @DeleteMapping(path = "/delete/{id}")
     public void deleteOrder(@PathVariable Long id) {
-        orderService.deleteOrder(id);}
-
+        orderService.deleteOrder(id);
+    }
 }
-

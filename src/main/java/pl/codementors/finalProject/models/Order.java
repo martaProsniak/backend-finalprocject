@@ -32,7 +32,10 @@ public class Order implements Serializable {
     @JsonIgnoreProperties(value = {"seller", "cart", "buyer"})
     private List<Product> items;
 
-    public Order(LocalUser buyer, double value, String address, List<Product> items) {
+    public Order(LocalUser buyer,
+                 double value,
+                 String address,
+                 List<Product> items) {
         this.buyer = buyer;
         this.value = value;
         this.address = address;
