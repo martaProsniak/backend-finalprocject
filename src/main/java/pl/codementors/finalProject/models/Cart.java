@@ -20,6 +20,7 @@ public class Cart {
     private Double cartValue;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnoreProperties(value = {"seller"})
     private List<Product> products;
 
     @OneToOne(mappedBy = "cart")
