@@ -31,7 +31,7 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "cartid")
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"products", "cartValue", "buyer"})
     private Cart cart;
 
     @ManyToOne

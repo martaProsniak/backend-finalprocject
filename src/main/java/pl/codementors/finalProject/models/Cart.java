@@ -19,12 +19,12 @@ public class Cart {
     @Column
     private Double cartValue;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnoreProperties(value = {"seller"})
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties(value = {"seller", "cart"})
     private List<Product> products;
 
     @OneToOne(mappedBy = "cart", cascade = CascadeType.MERGE)
-    @JsonIgnoreProperties(value = {"products", "password", "orders"})
+    @JsonIgnoreProperties(value = {"products", "password", "orders", "cart"})
     private LocalUser buyer;
 
     public Cart(){}

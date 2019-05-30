@@ -44,7 +44,7 @@ public class LocalUser {
     @JsonIgnoreProperties(value = "seller")
     private List<Product> products = new ArrayList<>();
 
-    @OneToMany(mappedBy = "buyer", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "buyer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "buyer")
     private List<Order> orders = new ArrayList<>();
 
