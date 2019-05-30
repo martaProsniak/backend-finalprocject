@@ -23,7 +23,7 @@ public class Cart {
     @JsonIgnoreProperties(value = {"seller"})
     private List<Product> products;
 
-    @OneToOne(mappedBy = "cart")
+    @OneToOne(mappedBy = "cart", cascade = CascadeType.MERGE)
     @JsonIgnoreProperties(value = {"products", "password", "orders"})
     private LocalUser buyer;
 

@@ -9,6 +9,7 @@ import pl.codementors.finalProject.models.Product;
 import pl.codementors.finalProject.repo.CartRepository;
 import pl.codementors.finalProject.repo.LocalUserRepository;
 import pl.codementors.finalProject.repo.OrderRepository;
+import pl.codementors.finalProject.repo.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class OrderServiceImpl implements OrderService {
     CartRepository cartRepository;
 
     @Autowired
+    ProductRepository productRepository;
+
+    @Autowired
     private LocalUserRepository localUserRepository;
 
     @Override
@@ -43,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order addOrder(Long cartid, Order sentOrder) {
+        //create new order
         Order order = new Order();
         Cart cart = cartRepository.findOne(cartid);
         order.setBuyer(cart.getBuyer());
@@ -52,8 +57,14 @@ public class OrderServiceImpl implements OrderService {
         order.setItems(itemList);
         orderRepository.save(order);
         cart.getProducts().clear();
+        //clear cart after order
         cart.setCartValue(0D);
         cartRepository.save(cart);
+        //set products as unavailable
+        for (Product item : itemList) {
+            item.setAvailable(false);
+            productRepository.save(item);
+        }
         return order;
     }
 
