@@ -16,7 +16,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderid;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "buyer", referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"products", "password", "cart", "orders"})
     private LocalUser buyer;
@@ -29,7 +29,7 @@ public class Order implements Serializable {
 
     @ElementCollection
     @Column(name="items")
-    @JsonIgnoreProperties(value = {"seller", "cart", "buyer"})
+    @JsonIgnoreProperties(value = {"seller", "cart"})
     private List<Product> items;
 
     public Order(LocalUser buyer,

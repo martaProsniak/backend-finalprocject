@@ -51,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
         List<Product> itemList = new ArrayList<>(cart.getProducts());
         order.setItems(itemList);
         orderRepository.save(order);
+        cart.getProducts().clear();
+        cart.setCartValue(0D);
+        cartRepository.save(cart);
         return order;
     }
 
