@@ -35,13 +35,13 @@ public class CartRestController {
     }
 
     @PostMapping("/add/product/{productId}/{userId}")
-    public Cart addToCart(@PathVariable ("userId")Long userId,
-                          @PathVariable ("productId") Long productId) {
-        return  cartService.addProductToCart(userId, productId);
+    public Cart addToCart(@PathVariable("userId") Long userId,
+                          @PathVariable("productId") Long productId) {
+        return cartService.addProductToCart(userId, productId);
     }
 
     @GetMapping("/{id}")
-    public Cart getCartById (@PathVariable Long id) {
+    public Cart getCartById(@PathVariable Long id) {
         return cartService.findOne(id);
     }
 }

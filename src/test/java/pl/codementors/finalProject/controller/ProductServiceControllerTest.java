@@ -65,21 +65,6 @@ public class ProductServiceControllerTest extends AbstractTest {
         long status = mvcResult.getResponse().getStatus();
         Assert.assertEquals(200, status);
     }
-/*
-        @Test
-        public void editProduct() throws Exception {
-            String uri = "products/edit/1";
-            Product product = new Product();
-            product.setName("TestPhone");
-            String inputJson = super.mapToJson(product);
-            MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .content(inputJson)).andReturn();
-
-            long status = mvcResult.getResponse().getStatus();
-            Assert.assertEquals(200, status);
-        }
- */
 
     @Test
     public void delete() {
