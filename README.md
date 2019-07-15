@@ -9,7 +9,7 @@ sudo docker-compose up -d
 cd ..
 mvn clean install 
 cd target
-sudo docker-compose up -d
+java -jar finalProject-0.0.1-SNAPSHOT.jar
 
 FRONTEND:
 git clone https://github.com/martaProsniak/frontend-finalproject.git
